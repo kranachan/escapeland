@@ -1,0 +1,15 @@
+{
+  "name": "escapeland",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "studio"
+  ],
+  "devDependencies": {
+    "bun-types": "latest",
+    "prettier": "^3.0.0"
+  },
+  "scripts": {
+    "format": "npx prettier --write ."
+  }
+}
