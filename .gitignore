@@ -15,8 +15,8 @@ node_modules
 /app/.astro
 
 # Webui environment variables
-/app/.env
-/app/.env.production
+/app/src/.env
+/app/src/.env.production
 
 # Logs
 /logs
