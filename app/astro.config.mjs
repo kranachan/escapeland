@@ -5,9 +5,7 @@ import sanity from '@sanity/astro'
 import { loadEnv } from 'vite'
 
 // https://astro.build/config
-export default defineConfig(({ mode }) => {
-  Object.assign(process.env, loadEnv(mode, process.cwd()))
-  return {
+export default defineConfig({
     integrations: [
       react(),
       tailwind(),
@@ -18,4 +16,4 @@ export default defineConfig(({ mode }) => {
       }),
     ],
   }
-})
+)
