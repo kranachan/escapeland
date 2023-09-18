@@ -1,0 +1,27 @@
+---
+import { runQuery } from '~/sanity/run-query'
+import me from '~/me.profile'
+import PortableText from '~/components/PortableText.astro'
+import DefaultLayout from '~/components/DefaultLayout.astro'
+import { postQuery } from '~/sanity/queries/post'
+
+export async function getStaticPaths() {
+  const posts = await runQuery(postQuery)
+
+  return posts.map((post) => {
+    return {
+      params: {
+        slug: post.slug || '',
+      },
+      props: { ...post },
+    }
+  })
+}
+
+const { title, body } = Astro.props
+---
+
+<DefaultLayout title={`${title} - ${me.name}'s Escapeland`}>
+  <h1>{title}</h1>
+  <PortableText portableText={body} />
+</DefaultLayout>
