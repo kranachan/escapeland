@@ -14,9 +14,11 @@ node_modules
 # Generated Astro types
 /app/.astro
 
-# Webui environment variables
-/app/.env
-/app/.env.production
+# Environment variables
+.env
+.env.production
+.env.development
+.env.local
 
 # Logs
 /logs
