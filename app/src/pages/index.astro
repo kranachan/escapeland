@@ -1,6 +1,12 @@
 ---
 import DefaultLayout from '~/components/DefaultLayout.astro'
 import me from '~/me.profile'
+
+const { name, bio } = me
 ---
 
-<DefaultLayout title={`${me.name}'s Escapeland`}>Index</DefaultLayout>
+<DefaultLayout title={'⭐️'}>
+  <h1 class="text-xl">{name}'s Escapeland</h1>
+  <pre
+    class="text-sm text-gray-400 mt-4 break-words whitespace-pre-wrap">{bio}</pre>
+</DefaultLayout>

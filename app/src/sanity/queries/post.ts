@@ -6,6 +6,7 @@ export const postQuery = q('*')
   .grab$({
     slug: q.slug('slug'),
     title: q.string(),
+    publishedAt: q.date(),
     mainImage: sanityImage('mainImage'),
     categories: categoryQuery,
     body: q('body')

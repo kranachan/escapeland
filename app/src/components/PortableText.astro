@@ -2,12 +2,9 @@
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
 import PortableTextImage from './PortableTextImage.astro'
 import type { PortableTextProps } from 'astro-portabletext/types'
+import '~/styles/portable-text.css'
 
-interface Props {
-  portableText: PortableTextProps['value']
-}
-
-const { portableText } = Astro.props
+interface Props extends PortableTextProps {}
 
 const components = {
   type: {
@@ -16,4 +13,8 @@ const components = {
 }
 ---
 
-<PortableTextInternal value={portableText} components={components} />
+<PortableTextInternal
+  class={'portable-text'}
+  components={components}
+  {...Astro.props}
+/>

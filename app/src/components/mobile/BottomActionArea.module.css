@@ -1,0 +1,10 @@
+.mobile-action-area {
+  @apply sm:!hidden fixed left-0 bottom-0 w-full h-16;
+  @apply flex justify-center items-center;
+
+  background: linear-gradient(
+    transparent 0,
+    rgba(129, 98, 123, 0.8) 64%,
+    #85607a 100%
+  );
+}

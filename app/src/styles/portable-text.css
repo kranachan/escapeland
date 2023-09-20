@@ -1,0 +1,35 @@
+.portable-text {
+  @apply leading-10;
+}
+
+blockquote[class~='portable-text'] {
+  @apply bg-[#dfdfdf]/20 px-4;
+}
+
+em[class~='portable-text'] {
+  @apply italic;
+}
+
+li[class~='portable-text'] {
+  @apply list-item list-inside list-disc;
+}
+
+a[class~='portable-text'] {
+  @apply underline;
+}
+
+h1[class~='portable-text'] {
+  @apply text-3xl leading-relaxed;
+}
+
+h2[class~='portable-text'] {
+  @apply text-2xl leading-relaxed;
+}
+
+h3[class~='portable-text'] {
+  @apply text-xl leading-relaxed;
+}
+
+h4[class~='portable-text'] {
+  @apply text-lg leading-relaxed;
+}

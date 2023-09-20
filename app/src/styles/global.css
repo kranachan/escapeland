@@ -1,0 +1,16 @@
+a {
+  &:hover {
+    @apply brightness-75;
+  }
+
+  &:active {
+    @apply brightness-50;
+  }
+}
+
+html {
+  @apply bg-[#120d0e] text-white;
+  @apply selection:bg-[#85607a];
+
+  -webkit-tap-highlight-color: transparent;
+}
