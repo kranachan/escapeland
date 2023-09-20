@@ -1,0 +1,31 @@
+---
+import DefaultLayout from '~/components/DefaultLayout.astro'
+import PortableTextImage from '~/components/PortableTextImage.astro'
+import { postQuery } from '~/sanity/queries/post'
+import { runQuery } from '~/sanity/run-query'
+
+const posts = await runQuery(postQuery)
+---
+
+<DefaultLayout title={'BLOG'}>
+  {
+    posts && (
+      <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
+        {posts.map((post) => {
+          return (
+            <li>
+              <a href={`post/${post.slug}`}>
+                <PortableTextImage
+                  class={'w-full max-h-40 object-cover'}
+                  node={{ asset: post.mainImage.asset }}
+                />
+                {post.title}
+                <p class="text-xs">{post.publishedAt}</p>
+              </a>
+            </li>
+          )
+        })}
+      </ul>
+    )
+  }
+</DefaultLayout>
