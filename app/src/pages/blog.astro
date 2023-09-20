@@ -16,7 +16,7 @@ const posts = await runQuery(postQuery)
             <li>
               <a href={`post/${post.slug}`}>
                 <PortableTextImage
-                  class={'w-full max-h-40 object-cover'}
+                  class={'w-full h-40 object-cover'}
                   node={{ asset: post.mainImage.asset }}
                 />
                 {post.title}
