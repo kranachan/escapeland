@@ -22,6 +22,7 @@
     "astro-icon": "^0.8.1",
     "astro-portabletext": "^0.9.4",
     "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
     "groqd": "^0.15.9",
     "nanostores": "^0.9.3",
     "react": "^18.0.0",
