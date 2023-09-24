@@ -33,3 +33,7 @@ h3[class~='portable-text'] {
 h4[class~='portable-text'] {
   @apply text-lg leading-relaxed;
 }
+
+img[class~='portable-text'] {
+  @apply my-4;
+}

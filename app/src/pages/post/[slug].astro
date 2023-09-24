@@ -2,10 +2,12 @@
 import { runQuery } from '~/sanity/run-query'
 import PortableText from '~/components/PortableText.astro'
 import DefaultLayout from '~/components/DefaultLayout.astro'
-import { postQuery } from '~/sanity/queries/post'
+import { postsQuery } from '~/sanity/schemas/post'
+import { Categories } from '~/components/Categories'
+import type { Post } from '~/sanity/schemas/post'
 
 export async function getStaticPaths() {
-  const posts = await runQuery(postQuery)
+  const posts = await runQuery(postsQuery)
   return posts.map((post) => {
     return {
       params: {
@@ -16,11 +18,15 @@ export async function getStaticPaths() {
   })
 }
 
-const { publishedAt, title, body } = Astro.props
+interface Props extends Post {}
+
+const { publishedAt, categories, title, body } = Astro.props
 ---
 
 <DefaultLayout title={`${title} | BLOG`}>
+  <Categories categories={categories} />
   <span class="text-sm">{publishedAt}</span>
   <h1 class="text-2xl font-bold mb-4">{title}</h1>
+  <!-- @ts-ignore -->
   <PortableText value={body} />
 </DefaultLayout>
