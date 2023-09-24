@@ -1,14 +1,22 @@
-import { q, sanityImage } from 'groqd'
-import { categoryQuery } from './category'
+import { q, sanityImage, type InferType } from 'groqd'
 
-export const postQuery = q('*')
-  .filter('_type == "post"')
+export type Post = InferType<typeof postsQuery>[number]
+
+export const postsQuery = q('*')
+  .filterByType('post')
   .grab$({
     slug: q.slug('slug'),
     title: q.string(),
     publishedAt: q.date(),
     mainImage: sanityImage('mainImage'),
-    categories: categoryQuery,
+    categories: q('categories')
+      .filter()
+      .deref()
+      .grab$({
+        title: q.string(),
+        description: q.string(),
+      })
+      .nullable(),
     body: q('body')
       .filter()
       .select({

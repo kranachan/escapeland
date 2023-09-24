@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<'img'> {
   }
 }
 
-const { node, class: className, ...rest } = Astro.props
+const { node, ...rest } = Astro.props
 const { asset, alt } = node
 const url = urlForImage(asset).url()
 const webpUrl = urlForImage(asset).format('webp').url()
@@ -18,5 +18,5 @@ const webpUrl = urlForImage(asset).format('webp').url()
 
 <picture>
   <source srcset={webpUrl} type="image/webp" />
-  <img class:list={['my-4', className]} src={url} alt={alt} {...rest} />
+  <img src={url} alt={alt} {...rest} />
 </picture>

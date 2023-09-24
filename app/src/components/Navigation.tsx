@@ -2,7 +2,7 @@ import me from '~/me.profile'
 import { BottomActionArea } from './mobile/BottomActionArea'
 import type { FC } from 'react'
 import { useStore } from '@nanostores/react'
-import { isMobileNavOpen } from '~/store'
+import { $isMobileNavOpen } from '~/store'
 import clsx from 'clsx'
 import { Overlay } from './mobile/Overlay'
 
@@ -26,13 +26,13 @@ export interface NavigationProps {
 }
 
 export const Navigation: FC<NavigationProps> = (props) => {
-  const $isMobileNavOpen = useStore(isMobileNavOpen)
+  const isMobileNavOpen = useStore($isMobileNavOpen)
   return (
     <>
       <section
         className={clsx(
           'sm:flex flex-col gap-8 fixed left-6 z-10',
-          $isMobileNavOpen ? 'flex' : 'hidden',
+          isMobileNavOpen ? 'flex' : 'hidden',
         )}
       >
         <a
@@ -64,8 +64,8 @@ export const Navigation: FC<NavigationProps> = (props) => {
           <i> * かぼちゃの馬車 *</i>
         </a>
       </section>
-      <Overlay show={$isMobileNavOpen} />
-      <BottomActionArea>{$isMobileNavOpen ? '✕' : '+'}</BottomActionArea>
+      <Overlay show={isMobileNavOpen} />
+      <BottomActionArea>{isMobileNavOpen ? '✕' : '+'}</BottomActionArea>
     </>
   )
 }
