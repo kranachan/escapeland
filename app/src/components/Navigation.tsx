@@ -31,12 +31,12 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <>
       <section
         className={clsx(
-          'sm:flex flex-col gap-8 fixed left-6 z-10',
+          'sm:flex flex-col gap-8 fixed left-6 z-20',
           isMobileNavOpen ? 'flex' : 'hidden',
         )}
       >
         <a
-          className="w-12 rounded-lg transition-all hover:mix-blend-luminosity active:brightness-90"
+          className="w-12 rounded-lg transition-all hover:mix-blend-luminosity"
           href="/"
         >
           <img
@@ -64,8 +64,10 @@ export const Navigation: FC<NavigationProps> = (props) => {
           <i> * かぼちゃの馬車 *</i>
         </a>
       </section>
-      <Overlay show={isMobileNavOpen} />
-      <BottomActionArea>{isMobileNavOpen ? '✕' : '+'}</BottomActionArea>
+      <Overlay className="z-10" show={isMobileNavOpen} />
+      <BottomActionArea className="z-10">
+        {isMobileNavOpen ? '✕' : '+'}
+      </BottomActionArea>
     </>
   )
 }
