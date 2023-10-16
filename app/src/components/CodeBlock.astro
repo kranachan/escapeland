@@ -1,0 +1,46 @@
+---
+import '~/styles/refractor-prism-theme.css'
+import Refractor from 'react-refractor'
+import javascript from 'refractor/lang/javascript'
+import typescript from 'refractor/lang/typescript'
+import rust from 'refractor/lang/rust'
+import golang from 'refractor/lang/go'
+import ruby from 'refractor/lang/ruby'
+import php from 'refractor/lang/php'
+import css from 'refractor/lang/css'
+import jsx from 'refractor/lang/jsx'
+import tsx from 'refractor/lang/tsx'
+import markdown from 'refractor/lang/markdown'
+import python from 'refractor/lang/python'
+import nginx from 'refractor/lang/nginx'
+import kotlin from 'refractor/lang/kotlin'
+import swift from 'refractor/lang/swift'
+import yaml from 'refractor/lang/yaml'
+
+Refractor.registerLanguage(javascript)
+Refractor.registerLanguage(typescript)
+Refractor.registerLanguage(rust)
+Refractor.registerLanguage(golang)
+Refractor.registerLanguage(ruby)
+Refractor.registerLanguage(php)
+Refractor.registerLanguage(css)
+Refractor.registerLanguage(jsx)
+Refractor.registerLanguage(tsx)
+Refractor.registerLanguage(markdown)
+Refractor.registerLanguage(python)
+Refractor.registerLanguage(nginx)
+Refractor.registerLanguage(kotlin)
+Refractor.registerLanguage(swift)
+Refractor.registerLanguage(yaml)
+
+interface Props {
+  node: {
+    language: string
+    code: string
+  }
+}
+
+const { node } = Astro.props
+---
+
+<Refractor language={node.language} value={node.code} />

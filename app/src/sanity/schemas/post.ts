@@ -22,6 +22,15 @@ export const postsQuery = q('*')
       .select({
         '_type == "block"': ['{...}', q.contentBlock()],
         '_type == "image"': ['{...}', sanityImage('').schema],
+        '_type == "codeBlock"': [
+          '{...}',
+          q.object({
+            _key: q.string().nullable(),
+            _type: q.string(),
+            code: q.string(),
+            language: q.string(),
+          }),
+        ],
         default: {
           _key: q.string(),
           _type: ['"unsupported"', q.literal('unsupported')],
