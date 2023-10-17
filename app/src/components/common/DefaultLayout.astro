@@ -25,7 +25,7 @@ const { title } = Astro.props
   <body
     class="flex sm:justify-end p-8 sm:p-16 bg-effect-crt font-dotgothic16 min-h-screen"
   >
-    <Navigation client:load currentRoute={Astro.url.pathname} />
+    <Navigation client:only currentRoute={Astro.url.pathname} />
     <main class="w-full sm:flex-[0_0_calc(100%_-_8rem)]">
       <slot />
     </main>
