@@ -1,9 +1,9 @@
 ---
 import { runQuery } from '~/sanity/run-query'
-import PortableText from '~/components/PortableText.astro'
-import DefaultLayout from '~/components/DefaultLayout.astro'
+import PortableText from '~/components/common/portable-text/PortableText.astro'
+import DefaultLayout from '~/components/common/DefaultLayout.astro'
 import { postsQuery } from '~/sanity/schemas/post'
-import { Categories } from '~/components/Categories'
+import { Categories } from '~/components/common/Categories'
 import type { Post } from '~/sanity/schemas/post'
 
 export async function getStaticPaths() {
