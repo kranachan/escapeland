@@ -1,5 +1,4 @@
 import type { ButtonHTMLAttributes, FC, ReactNode } from 'react'
-import styles from './BottomActionArea.module.css'
 import { useStore } from '@nanostores/react'
 import { $isMobileNavOpen } from '~/store'
 import clsx from 'clsx'
@@ -15,7 +14,10 @@ export const BottomActionArea: FC<BottomActionAreaProps> = (props) => {
   const isMobileNavOpen = useStore($isMobileNavOpen)
   return (
     <button
-      className={clsx(styles['mobile-action-area'], className)}
+      className={clsx(
+        'sm:!hidden fixed left-0 bottom-0 w-full h-16 flex justify-center items-center bg-accent-gradient-to-t',
+        className,
+      )}
       onClick={() => {
         $isMobileNavOpen.set(!isMobileNavOpen)
       }}
