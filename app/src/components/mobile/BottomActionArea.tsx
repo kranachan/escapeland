@@ -12,6 +12,15 @@ export interface BottomActionAreaProps
 export const BottomActionArea: FC<BottomActionAreaProps> = (props) => {
   const { className, children, ...rest } = props
   const isMobileNavOpen = useStore($isMobileNavOpen)
+
+  $isMobileNavOpen.subscribe((isOpen) => {
+    if (isOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+  })
+
   return (
     <button
       className={clsx(
@@ -19,11 +28,6 @@ export const BottomActionArea: FC<BottomActionAreaProps> = (props) => {
         className,
       )}
       onClick={() => {
-        if (!isMobileNavOpen) {
-          document.body.classList.add('overflow-hidden')
-        } else {
-          document.body.classList.remove('overflow-hidden')
-        }
         $isMobileNavOpen.set(!isMobileNavOpen)
       }}
       {...rest}
