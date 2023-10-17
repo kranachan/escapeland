@@ -31,7 +31,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
     <>
       <section
         className={clsx(
-          'sm:flex flex-col gap-8 fixed left-6 z-20',
+          'sm:flex flex-col gap-8 fixed left-6 bottom-36 sm:bottom-auto z-20',
           isMobileNavOpen ? 'flex' : 'hidden',
         )}
       >

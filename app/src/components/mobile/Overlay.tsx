@@ -13,7 +13,7 @@ export const Overlay: FC<OverlayProps> = (props) => {
     show && (
       <div
         className={clsx(
-          'sm:hidden fixed top-0 left-0 w-full h-full bg-[#85607a]',
+          'sm:hidden fixed top-0 left-0 w-full h-full bg-accent-gradient-to-tr',
           className,
         )}
         {...rest}
