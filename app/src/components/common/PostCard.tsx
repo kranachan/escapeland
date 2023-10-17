@@ -13,7 +13,7 @@ export const PostCard: FC<PostCardProps> = (props) => {
       <div className="mb-3">{children}</div>
       <Categories categories={preview.categories} />
       <p>{preview.title}</p>
-      <p className="text-xs">{preview.publishedAt.toString()}</p>
+      <p className="text-xs">{preview.publishedAt.toDateString()}</p>
     </a>
   )
 }
