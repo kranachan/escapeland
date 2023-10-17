@@ -1,10 +1,10 @@
 import me from '~/me.profile'
-import { BottomActionArea } from './mobile/BottomActionArea'
+import { BottomActionArea } from '../mobile/BottomActionArea'
 import type { FC } from 'react'
 import { useStore } from '@nanostores/react'
 import { $isMobileNavOpen } from '~/store'
 import clsx from 'clsx'
-import { Overlay } from './mobile/Overlay'
+import { Overlay } from '../mobile/Overlay'
 
 const navigation = {
   BLOG: '/blog',
