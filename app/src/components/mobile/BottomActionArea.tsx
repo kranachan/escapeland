@@ -19,6 +19,11 @@ export const BottomActionArea: FC<BottomActionAreaProps> = (props) => {
         className,
       )}
       onClick={() => {
+        if (!isMobileNavOpen) {
+          document.body.classList.add('overflow-hidden')
+        } else {
+          document.body.classList.remove('overflow-hidden')
+        }
         $isMobileNavOpen.set(!isMobileNavOpen)
       }}
       {...rest}
