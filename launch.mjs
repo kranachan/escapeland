@@ -1,5 +1,11 @@
-const launch = async (dir) => {
-  const task = Bun.spawn(['bun', 'run', 'dev'], {
+/**
+ * Launch an application.
+ * @param { string } dir - The directory of the application.
+ * @param { string[] } [commandOptions] - (Optional) The launch options.
+ * @returns { Promise<void> }
+ */
+const launch = async (dir, commandOptions = []) => {
+  const task = Bun.spawn(['bun', 'run', 'dev', ...commandOptions], {
     cwd: dir,
     env: process.env,
   })
@@ -14,7 +20,7 @@ const launch = async (dir) => {
 }
 
 const launchApp = async () => {
-  await launch('app')
+  await launch('app', ['--host'])
 }
 
 const launchStudio = async () => {
