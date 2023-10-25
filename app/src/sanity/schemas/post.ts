@@ -2,6 +2,8 @@ import { q, sanityImage, type InferType } from 'groqd'
 
 export type Post = InferType<typeof postsQuery>[number]
 
+export type PostDirectory = InferType<typeof postDirectoryQuery>
+
 export const postsQuery = q('*')
   .filterByType('post')
   .grab$({
@@ -37,4 +39,20 @@ export const postsQuery = q('*')
           unsupportedType: ['_type', q.string()],
         },
       }),
+  })
+
+export const postDirectoryQuery = q('*')
+  .filterByType('post')
+  .grab$({
+    slug: q.slug('slug'),
+    title: q.string(),
+    publishedAt: q.date(),
+    categories: q('categories')
+      .filter()
+      .deref()
+      .grab$({
+        title: q.string(),
+        description: q.string(),
+      })
+      .nullable(),
   })
