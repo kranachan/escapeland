@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets'
 import DefaultLayout from '~/components/common/DefaultLayout.astro'
-import Tilt from 'react-parallax-tilt'
 import IdentityImagePng from '~/assets/identity.png'
 import me from '~/me.profile'
 
@@ -13,14 +12,12 @@ const { name, bio } = me
   <pre
     class="text-sm text-gray-400 mt-4 break-words whitespace-pre-wrap">{bio}</pre>
   <div class="w-fit">
-    <Tilt client:load tiltReverse trackOnWindow>
-      <Image
-        class="my-20"
-        width={600}
-        src={IdentityImagePng}
-        alt="identity"
-        draggable="false"
-      />
-    </Tilt>
+    <Image
+      class="my-20"
+      width={600}
+      src={IdentityImagePng}
+      alt="identity"
+      draggable="false"
+    />
   </div>
 </DefaultLayout>
