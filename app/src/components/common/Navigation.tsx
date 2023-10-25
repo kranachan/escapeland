@@ -1,10 +1,11 @@
 import me from '~/me.profile'
 import { BottomActionArea } from '../mobile/BottomActionArea'
-import type { FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { useStore } from '@nanostores/react'
 import { $isMobileNavOpen } from '~/store'
 import clsx from 'clsx'
 import { Overlay } from '../mobile/Overlay'
+import { useInView } from 'react-intersection-observer'
 
 const navigation = {
   BLOG: '/blog',
@@ -27,6 +28,12 @@ export interface NavigationProps {
 
 export const Navigation: FC<NavigationProps> = (props) => {
   const isMobileNavOpen = useStore($isMobileNavOpen)
+  const [overlayInViewRef, overlayInView] = useInView()
+
+  useEffect(() => {
+    $isMobileNavOpen.set(overlayInView)
+  }, [overlayInView])
+
   return (
     <>
       <section
@@ -46,11 +53,18 @@ export const Navigation: FC<NavigationProps> = (props) => {
             draggable="false"
           />
         </a>
-        <aside className="flex flex-col gap-4 text-sm tracking-wider font-bold ml-1">
+        <aside className="flex flex-col gap-4 text-sm tracking-wider ml-1">
           {Object.entries(navigation).map(([title, route]) => {
             const isActive = route === props.currentRoute
             return (
-              <a href={route} key={title}>
+              <a
+                className={clsx(
+                  'opacity-50',
+                  isActive && 'font-bold opacity-100',
+                )}
+                href={route}
+                key={title}
+              >
                 {title}
                 {isActive && <i>*</i>}
               </a>
@@ -64,8 +78,10 @@ export const Navigation: FC<NavigationProps> = (props) => {
           <i> * かぼちゃの馬車 *</i>
         </a>
       </section>
-      <Overlay className="z-10" show={isMobileNavOpen} />
-      <BottomActionArea className="z-10">
+      <Overlay className="z-10" show={isMobileNavOpen}>
+        <div ref={overlayInViewRef} />
+      </Overlay>
+      <BottomActionArea className="z-30">
         {isMobileNavOpen ? '✕' : '+'}
       </BottomActionArea>
     </>
