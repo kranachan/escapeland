@@ -60,7 +60,7 @@ export const Navigation: FC<NavigationProps> = (props) => {
               <a
                 className={clsx(
                   'opacity-50',
-                  isActive && 'font-bold opacity-100',
+                  isActive && 'font-bold !opacity-100',
                 )}
                 href={route}
                 key={title}
