@@ -47,12 +47,4 @@ export const postDirectoryQuery = q('*')
     slug: q.slug('slug'),
     title: q.string(),
     publishedAt: q.date(),
-    categories: q('categories')
-      .filter()
-      .deref()
-      .grab$({
-        title: q.string(),
-        description: q.string(),
-      })
-      .nullable(),
   })
