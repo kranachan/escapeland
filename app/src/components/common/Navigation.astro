@@ -36,7 +36,8 @@ const { class: className, ...rest } = Astro.props
   <aside class="flex flex-col gap-4 text-sm tracking-wider ml-1">
     {
       Object.entries(navigation).map(([title, route]) => {
-        const isActive = route === Astro.url.pathname
+        const isProd = import.meta.env.PROD
+        const isActive = (isProd ? `${route}/` : route) === Astro.url.pathname
         return (
           <a
             class={twMerge(
