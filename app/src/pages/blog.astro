@@ -1,14 +1,15 @@
 ---
-import DefaultLayout from '~/components/common/DefaultLayout.astro'
+import PageLayout from '~/layouts/PageLayout.astro'
 import { postsQuery } from '~/sanity/schemas/post'
 import { runQuery } from '~/sanity/run-query'
 import PortableTextImage from '~/components/common/portable-text/PortableTextImage.astro'
-import { PostCard } from '~/components/common/PostCard'
+import WithArticle from '~/components/common/WithArticle.astro'
+import Categories from '~/components/common/Categories.astro'
 
 const posts = await runQuery(postsQuery)
 ---
 
-<DefaultLayout title={'BLOG'}>
+<PageLayout title={'BLOG'}>
   {
     posts && (
       <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12">
@@ -19,26 +20,22 @@ const posts = await runQuery(postsQuery)
               new Date(a.publishedAt).getTime(),
           )
           .map((post) => {
-            const { title, slug, categories, publishedAt } = post
+            const { slug, categories, ...article } = post
             return (
               <li>
-                <PostCard
-                  preview={{
-                    title,
-                    slug,
-                    categories,
-                    publishedAt,
-                  }}
-                >
-                  <PortableTextImage
-                    class={'w-full h-40 object-cover'}
-                    node={{ asset: post.mainImage.asset }}
-                  />
-                </PostCard>
+                <a href={`/post/${slug}`}>
+                  <WithArticle article={article}>
+                    <PortableTextImage
+                      class="mb-2"
+                      node={{ asset: post.mainImage.asset }}
+                    />
+                    <Categories categories={categories} />
+                  </WithArticle>
+                </a>
               </li>
             )
           })}
       </ul>
     )
   }
-</DefaultLayout>
+</PageLayout>

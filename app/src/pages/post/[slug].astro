@@ -1,11 +1,10 @@
 ---
 import { runQuery } from '~/sanity/run-query'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
-import DefaultLayout from '~/components/common/DefaultLayout.astro'
-import { postsQuery, postDirectoryQuery } from '~/sanity/schemas/post'
-import { Categories } from '~/components/common/Categories'
+import PageLayout from '~/layouts/PageLayout.astro'
+import { postsQuery } from '~/sanity/schemas/post'
+import Categories from '~/components/common/Categories.astro'
 import type { Post } from '~/sanity/schemas/post'
-import Directory from '~/components/common/Directory'
 
 export async function getStaticPaths() {
   const posts = await runQuery(postsQuery)
@@ -22,11 +21,9 @@ export async function getStaticPaths() {
 interface Props extends Post {}
 
 const { publishedAt, categories, title, body } = Astro.props
-
-const directory = await runQuery(postDirectoryQuery)
 ---
 
-<DefaultLayout title={`${title} | BLOG`}>
+<PageLayout title={`${title} | BLOG`}>
   <div class="grid grid-cols-1 sm:grid-cols-[3fr,1fr] gap-4 h-full">
     <div>
       <Categories categories={categories} />
@@ -35,10 +32,5 @@ const directory = await runQuery(postDirectoryQuery)
       <!-- @ts-ignore -->
       <PortableText value={body} />
     </div>
-    <Directory
-      client:load
-      directory={directory}
-      currentSlug={Astro.params.slug!}
-    />
   </div>
-</DefaultLayout>
+</PageLayout>

@@ -18,5 +18,5 @@ const webpUrl = urlForImage(asset).format('webp').url()
 
 <picture>
   <source srcset={webpUrl} type="image/webp" />
-  <img src={url} alt={alt} {...rest} />
+  <img src={url} alt={alt} draggable="false" {...rest} />
 </picture>

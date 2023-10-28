@@ -1,0 +1,44 @@
+---
+import clsx from 'clsx'
+import type { HTMLAttributes } from 'astro/types'
+
+export interface Props extends HTMLAttributes<'button'> {}
+
+const { class: className, ...rest } = Astro.props
+---
+
+<astro-overlay-trigger
+  class={clsx(
+    'sm:hidden fixed left-0 bottom-0 w-full h-16 flex justify-center items-center bg-accent-gradient-to-t',
+    className,
+  )}
+  {...rest}
+>
+  +
+</astro-overlay-trigger>
+
+<script>
+  import { $isMobileNavOpen } from '~/store/ui'
+
+  const toggleNavigation = () => {
+    $isMobileNavOpen.set(!$isMobileNavOpen.get())
+  }
+
+  class AstroOverlayTrigger extends HTMLElement {
+    constructor() {
+      super()
+      this.addEventListener('click', toggleNavigation)
+      $isMobileNavOpen.subscribe((isOpen) => {
+        if (isOpen) {
+          document.body.classList.add('overflow-hidden')
+          this.innerText = '✕'
+        } else {
+          document.body.classList.remove('overflow-hidden')
+          this.innerText = '+'
+        }
+      })
+    }
+  }
+
+  customElements.define('astro-overlay-trigger', AstroOverlayTrigger)
+</script>
