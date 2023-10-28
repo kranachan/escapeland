@@ -39,7 +39,11 @@ const { class: className, ...rest } = Astro.props
         const isActive = route === Astro.url.pathname
         return (
           <a
-            class={twMerge('opacity-50', isActive && 'font-bold opacity-100')}
+            class={twMerge(
+              'opacity-50',
+              isActive && 'font-bold opacity-100',
+              !isActive && 'hover:font-bold hover:opacity-100',
+            )}
             href={route}
           >
             {title}
