@@ -1,6 +1,44 @@
 ---
-import DefaultLayout from '~/components/common/DefaultLayout.astro'
-import me from '~/me.profile'
+import PageLayout from '~/layouts/PageLayout.astro'
+import { runQuery } from '~/sanity/run-query'
+import PortableTextImage from '~/components/common/portable-text/PortableTextImage.astro'
+import { productsQuery } from '~/sanity/schemas/product'
+import WithArticle from '~/components/common/WithArticle.astro'
+import Icon from '~/components/common/Icon.astro'
+
+const products = await runQuery(productsQuery)
 ---
 
-<DefaultLayout title={`ENGINEERING - ${me.name}'s Escapeland`} />
+<PageLayout title={'ENGINEERING'}>
+  {
+    products && (
+      <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12">
+        {products
+          .sort(
+            (a, b) =>
+              new Date(b.startedAt).getTime() - new Date(a.startedAt).getTime(),
+          )
+          .map((product) => {
+            const { mainImage, website, github, ...article } = product
+            return (
+              <li>
+                <a href={website}>
+                  <WithArticle article={article}>
+                    <PortableTextImage
+                      class="mb-2"
+                      node={{ asset: mainImage.asset }}
+                    />
+                  </WithArticle>
+                </a>
+                {github && (
+                  <a class="flex items-center gap-2 text-xs mt-4" href={github}>
+                    <Icon name="code" /> VIEW ON GITHUB
+                  </a>
+                )}
+              </li>
+            )
+          })}
+      </ul>
+    )
+  }
+</PageLayout>

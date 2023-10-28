@@ -1,5 +1,69 @@
 ---
-import DefaultLayout from '~/components/common/DefaultLayout.astro'
+import PageLayout from '~/layouts/PageLayout.astro'
+import { runQuery } from '~/sanity/run-query'
+import PortableTextImage from '~/components/common/portable-text/PortableTextImage.astro'
+import { atrworksQuery } from '~/sanity/schemas/artwork'
+import WithArticle from '~/components/common/WithArticle.astro'
+import '~/styles/medium-zoom.css'
+
+const artworks = await runQuery(atrworksQuery)
 ---
 
-<DefaultLayout title={`ARTWORKS`} />
+<PageLayout title={'ARTWORKS'}>
+  {
+    artworks && (
+      <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12">
+        {artworks
+          .sort(
+            (a, b) =>
+              new Date(b.publishedAt).getTime() -
+              new Date(a.publishedAt).getTime(),
+          )
+          .map((artwork) => {
+            const { illustration, ...article } = artwork
+            return (
+              <li>
+                <astro-zoomable>
+                  <WithArticle class="cursor-zoom-in" article={article}>
+                    <PortableTextImage
+                      data-zoomable
+                      class="mb-2"
+                      node={{ asset: illustration.asset }}
+                    />
+                  </WithArticle>
+                </astro-zoomable>
+              </li>
+            )
+          })}
+      </ul>
+    )
+  }
+</PageLayout>
+
+<script>
+  import mediumZoom from 'medium-zoom'
+  class AstroZoomable extends HTMLElement {
+    constructor() {
+      super()
+      const image = this.querySelectorAll('[data-zoomable]')
+
+      const zoom = mediumZoom(image, {
+        background: 'rgba(0, 0, 0, 0.9)',
+      })
+
+      zoom.on('open', () => {
+        document.body.style.overflow = 'hidden'
+      })
+
+      zoom.on('closed', () => {
+        document.body.style.overflow = 'auto'
+      })
+
+      this.addEventListener('click', () => {
+        zoom.open()
+      })
+    }
+  }
+
+  customElements.define('astro-zoomable', AstroZoomable)
+</script>

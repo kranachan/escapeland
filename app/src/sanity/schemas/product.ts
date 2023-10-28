@@ -9,6 +9,7 @@ export const productsQuery = q('*')
     startedAt: q.date(),
     completedAt: q.date(),
     mainImage: sanityImage('mainImage'),
+    description: q.string(),
     website: q.string(),
     github: q.string(),
   })

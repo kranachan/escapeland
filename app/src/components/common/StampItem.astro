@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import clsx from 'clsx'
+
+interface Props extends HTMLAttributes<'button'> {
+  stamp: {
+    title: string
+    imageUrl: string
+  }
+}
+
+const { stamp, class: className, ...rest } = Astro.props
+---
+
+<button
+  class={clsx(
+    'flex gap-8 w-24 h-24 relative items-end justify-center bg-[url(/../src/assets/sd-card.svg)] flex-shrink-0',
+    className,
+  )}
+  {...rest}
+>
+  <div class="absolute w-20 h-20 left-2 top-2 rounded-md overflow-hidden">
+    <div
+      class="absolute w-full h-full border border-dashed border-[#dfdfdf]/30"
+      style={{
+        background:
+          'linear-gradient(180deg, rgba(0, 0, 0, 0.00) 76.25%, rgba(0, 0, 0, 0.90) 100%)',
+      }}
+    >
+    </div>
+    <img
+      class="w-full h-full object-cover"
+      src={stamp.imageUrl}
+      alt={stamp.title}
+    />
+  </div>
+  <p class="relative px-2 my-2 text-sm">{stamp.title}</p>
+</button>

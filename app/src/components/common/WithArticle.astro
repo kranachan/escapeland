@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import type { Article } from '~/@types/article'
+import clsx from 'clsx'
+
+interface Props extends HTMLAttributes<'div'> {
+  article: Article
+}
+
+const { class: className, article, ...rest } = Astro.props
+
+const isWithRangeDate = 'startedAt' in article && 'completedAt' in article
+const isWithPublishedDate = 'publishedAt' in article
+---
+
+<div
+  class={clsx(
+    'flex flex-col gap-1 cursor-pointer hover:opacity-50 transition-all',
+    className,
+  )}
+  {...rest}
+>
+  <slot />
+  <p>{article.title}</p>
+  <p class="text-xs opacity-80">
+    {
+      isWithRangeDate &&
+        `${article.startedAt.toDateString()} - {${article.completedAt.toDateString()}`
+    }
+    {isWithPublishedDate && article.publishedAt.toDateString()}
+  </p>
+  {
+    article.description && (
+      <p class="text-sm opacity-80 mt-2">{article.description}</p>
+    )
+  }
+</div>

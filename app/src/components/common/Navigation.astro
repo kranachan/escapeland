@@ -1,0 +1,61 @@
+---
+import me from '~/me.profile'
+import clsx from 'clsx'
+import type { HTMLAttributes } from 'astro/types'
+import { twMerge } from 'tailwind-merge'
+
+const navigation = {
+  BLOG: '/blog',
+  ARTWORKS: '/artworks',
+  ENGINEERING: '/engineering',
+  ...Object.entries(me.contacts).reduce(
+    (accumulator: { [key: string]: string }, [key, value]) => {
+      key === 'e-mail'
+        ? (accumulator[key.toUpperCase()] = `mailto:${value}`)
+        : (accumulator[key.toUpperCase()] = value)
+      return accumulator
+    },
+    {},
+  ),
+}
+
+export interface Props extends HTMLAttributes<'div'> {}
+
+const { class: className, ...rest } = Astro.props
+---
+
+<astro-navigation
+  class={clsx('flex flex-col gap-8 fixed left-6', className)}
+  {...rest}
+>
+  <a class="w-12 rounded-lg transition-all" href="/">
+    <img
+      class="border-2 border-[#85607a]/30 rounded-lg"
+      src="/favicon.svg"
+      alt="Logo"
+      draggable="false"
+    />
+  </a>
+  <aside class="flex flex-col gap-4 text-sm tracking-wider ml-1">
+    {
+      Object.entries(navigation).map(([title, route]) => {
+        const isActive = route === Astro.url.pathname
+        return (
+          <a
+            class={twMerge('opacity-50', isActive && 'font-bold opacity-100')}
+            href={route}
+          >
+            {title}
+            {isActive && <i>*</i>}
+          </a>
+        )
+      })
+    }
+  </aside>
+  <a
+    class="fixed bottom-16 text-xs animate-bounce"
+    href="https://github.com/miyakoochi/escapeland"
+  >
+    <i> * かぼちゃの馬車 *</i>
+  </a>
+</astro-navigation>

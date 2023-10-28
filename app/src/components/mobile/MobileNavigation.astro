@@ -1,0 +1,20 @@
+---
+import BottomActionArea from '../mobile/BottomActionArea.astro'
+import Overlay from '../mobile/Overlay.astro'
+import Navigation from '../common/Navigation.astro'
+
+export interface Props {}
+---
+
+<Overlay class="z-10">
+  <Navigation class="bottom-36" />
+</Overlay>
+<BottomActionArea class="z-20" />
+
+<script>
+  import { $isMobileNavOpen } from '~/store/ui'
+
+  document.addEventListener('astro:page-load', () => {
+    $isMobileNavOpen.set(false)
+  })
+</script>

@@ -1,11 +1,12 @@
 ---
 import { Fragment } from 'react'
-import { Navigation } from './Navigation.tsx'
+import Navigation from '~/components/common/Navigation.astro'
 import '@fontsource/dotgothic16'
 import '~/styles/crt-effect.css'
 import '~/styles/global.css'
 import me from '~/me.profile'
 import { ViewTransitions } from 'astro:transitions'
+import MobileNavigation from '~/components/mobile/MobileNavigation.astro'
 
 interface Props {
   title?: string
@@ -25,7 +26,8 @@ const { title } = Astro.props
   <body
     class="flex sm:justify-end p-8 sm:p-16 bg-effect-crt font-dotgothic16 min-h-screen"
   >
-    <Navigation client:only="react" currentRoute={Astro.url.pathname} />
+    <Navigation class="hidden sm:flex" />
+    <MobileNavigation />
     <main class="w-full sm:flex-[0_0_calc(100%_-_8rem)]">
       <slot />
     </main>

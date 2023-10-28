@@ -1,0 +1,56 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import clsx from 'clsx'
+import { type PostDirectory } from '~/sanity/schemas/post'
+
+interface Props extends HTMLAttributes<'div'> {
+  directory: PostDirectory
+}
+
+const { directory, class: className, ...rest } = Astro.props
+---
+
+<div
+  class={clsx(
+    'flex flex-col justify-start items-end text-end h-full gap-4 overflow-y-auto thin-scrollbar',
+    className,
+  )}
+  {...rest}
+>
+  {
+    directory.map((directory) => {
+      const isCurrentSlug = Astro.params.slug === directory.slug
+      return (
+        <a
+          class={clsx('text-xs', !isCurrentSlug && 'opacity-50')}
+          href={directory.slug}
+        >
+          <p>{directory.publishedAt.toDateString()}</p>
+          <h3>
+            {isCurrentSlug && <i class="mr-2">*</i>} {directory.title}
+          </h3>
+        </a>
+      )
+    })
+  }
+</div>
+
+<!-- <script>
+  import { $isMobileNavOpen } from '~/store'
+
+  class AstroDirectory extends HTMLElement {
+    constructor() {
+      super()
+      $isMobileNavOpen.subscribe((isOpen) => {
+        if (isOpen) {
+          this.style.display = 'flex'
+          this.style.flexDirection = 'column-reverse'
+        } else {
+          this.style.display = 'none'
+        }
+      })
+    }
+  }
+
+  customElements.define('astro-directory', AstroDirectory)
+</script> -->
