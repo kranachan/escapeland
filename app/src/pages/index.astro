@@ -4,16 +4,33 @@ import PageLayout from '~/layouts/PageLayout.astro'
 import IdentityImagePng from '~/assets/identity.png'
 import me from '~/me.profile'
 
-const { name, bio } = me
+const { name, repository, archives } = me
 ---
 
 <PageLayout title={'⭐️'}>
   <h1 class="text-xl">{name}'s Escapeland</h1>
   <pre
-    class="text-sm text-gray-400 mt-4 break-words whitespace-pre-wrap">{bio}</pre>
+    class="text-sm mt-4 break-words whitespace-pre-wrap">
+Hey, I'm Minakami (ミナカミ), a somewhat half-baked creative developer.
+
+Basically, I'm all about:
+
+1. Ball-jointed dolls
+2. Crafting virtual worlds
+3. Artistic creation based on egoism
+
+You can reach me through the contacts on this page.
+
+This is a freshly baked portfolio (still a work in progress).
+
+If you want to check out past article archives, <a class="bg-[#85607a]" href={archives}>click here.</a>
+
+If you're interested in its source code or want to review the progress, <a class="bg-[#85607a]" href={repository}>click here</a>.
+
+  </pre>
   <div class="w-fit">
     <Image
-      class="my-20 select-none"
+      class="select-none"
       width={600}
       src={IdentityImagePng}
       alt="identity"
