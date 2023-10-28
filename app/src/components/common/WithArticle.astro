@@ -25,7 +25,7 @@ const isWithPublishedDate = 'publishedAt' in article
   <p class="text-xs opacity-80">
     {
       isWithRangeDate &&
-        `${article.startedAt.toDateString()} - {${article.completedAt.toDateString()}`
+        `${article.startedAt.toDateString()} - ${article.completedAt.toDateString()}`
     }
     {isWithPublishedDate && article.publishedAt.toDateString()}
   </p>
