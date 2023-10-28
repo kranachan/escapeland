@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'dotgothic16': ['DotGothic16'],
+        'bungee-shade': ['Bungee Shade'],
       },
     },
   },

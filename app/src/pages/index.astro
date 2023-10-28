@@ -3,14 +3,15 @@ import { Image } from 'astro:assets'
 import PageLayout from '~/layouts/PageLayout.astro'
 import IdentityImagePng from '~/assets/identity.png'
 import me from '~/me.profile'
+import '@fontsource/bungee-shade'
 
 const { name, repository, archives } = me
 ---
 
 <PageLayout title={'⭐️'}>
-  <h1 class="text-xl">{name}'s Escapeland</h1>
+  <h1 class="mt-1 font-bungee-shade text-3xl">{name}'s Escapeland</h1>
   <pre
-    class="text-sm mt-4 break-words whitespace-pre-wrap">
+    class="text-sm mt-8 break-words whitespace-pre-wrap">
 Hey, I'm Minakami (ミナカミ), a somewhat half-baked creative developer.
 
 Basically, I'm all about:
