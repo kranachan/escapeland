@@ -9,7 +9,11 @@ interface Props extends HTMLAttributes<'div'> {
 
 const { class: className, article, ...rest } = Astro.props
 
-const isWithRangeDate = 'startedAt' in article && 'completedAt' in article
+const hasStartedAt = 'startedAt' in article && !!article.startedAt
+const hasCompletedAt = 'completedAt' in article && !!article.completedAt
+
+const isIncompletion = hasStartedAt && !hasCompletedAt
+const isWithRangeDate = hasStartedAt && hasCompletedAt
 const isWithPublishedDate = 'publishedAt' in article
 ---
 
@@ -25,8 +29,9 @@ const isWithPublishedDate = 'publishedAt' in article
   <p class="text-xs opacity-80">
     {
       isWithRangeDate &&
-        `${article.startedAt.toDateString()} - ${article.completedAt.toDateString()}`
+        `${article.startedAt.toDateString()} - ${article.completedAt!.toDateString()}`
     }
+    {isIncompletion && `SINCE ${article.startedAt.toDateString()}`}
     {isWithPublishedDate && article.publishedAt.toDateString()}
   </p>
   {

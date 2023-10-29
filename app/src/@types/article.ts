@@ -1,5 +1,5 @@
 export type WithPublishedDate<T> = T & { publishedAt: Date }
-export type WithRangeDates<T> = T & { startedAt: Date; completedAt: Date }
+export type WithRangeDates<T> = T & { startedAt: Date; completedAt?: Date }
 
 export type ArticleBase = {
   title: string
