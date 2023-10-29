@@ -6,6 +6,7 @@ import { atrworksQuery } from '~/sanity/schemas/artwork'
 import WithArticle from '~/components/common/WithArticle.astro'
 import '~/styles/medium-zoom.css'
 import { sortDescendingByDate } from '~/utils/sort'
+import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
 
 const artworks = await runQuery(atrworksQuery)
 ---
@@ -13,24 +14,22 @@ const artworks = await runQuery(atrworksQuery)
 <PageLayout title={'ARTWORKS'}>
   {
     artworks && (
-      <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12">
+      <ResponsiveListLayout>
         {artworks.sort(sortDescendingByDate('publishedAt')).map((artwork) => {
           const { illustration, ...article } = artwork
           return (
-            <li>
-              <astro-zoomable>
-                <WithArticle class="cursor-zoom-in" article={article}>
-                  <PortableTextImage
-                    data-zoomable
-                    class="mb-2"
-                    node={{ asset: illustration.asset }}
-                  />
-                </WithArticle>
-              </astro-zoomable>
-            </li>
+            <astro-zoomable>
+              <WithArticle class="cursor-zoom-in" article={article}>
+                <PortableTextImage
+                  data-zoomable
+                  class="mb-2"
+                  node={{ asset: illustration.asset }}
+                />
+              </WithArticle>
+            </astro-zoomable>
           )
         })}
-      </ul>
+      </ResponsiveListLayout>
     )
   }
 </PageLayout>

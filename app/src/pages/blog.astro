@@ -6,6 +6,7 @@ import PortableTextImage from '~/components/common/portable-text/PortableTextIma
 import WithArticle from '~/components/common/WithArticle.astro'
 import Categories from '~/components/common/Categories.astro'
 import { sortDescendingByDate } from '~/utils/sort'
+import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
 
 const posts = await runQuery(postsQuery)
 ---
@@ -13,24 +14,22 @@ const posts = await runQuery(postsQuery)
 <PageLayout title={'BLOG'}>
   {
     posts && (
-      <ul class="grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12">
+      <ResponsiveListLayout>
         {posts.sort(sortDescendingByDate('publishedAt')).map((post) => {
           const { slug, categories, ...article } = post
           return (
-            <li>
-              <a href={`/post/${slug}`}>
-                <WithArticle article={article}>
-                  <PortableTextImage
-                    class="mb-2"
-                    node={{ asset: post.mainImage.asset }}
-                  />
-                  <Categories categories={categories} />
-                </WithArticle>
-              </a>
-            </li>
+            <a href={`/post/${slug}`}>
+              <WithArticle article={article}>
+                <PortableTextImage
+                  class="mb-2"
+                  node={{ asset: post.mainImage.asset }}
+                />
+                <Categories categories={categories} />
+              </WithArticle>
+            </a>
           )
         })}
-      </ul>
+      </ResponsiveListLayout>
     )
   }
 </PageLayout>
