@@ -1,4 +1,5 @@
 import { q, sanityImage, type InferType } from 'groqd'
+import { body } from './parts/body'
 
 export type Post = InferType<typeof postsQuery>[number]
 
@@ -19,26 +20,7 @@ export const postsQuery = q('*')
         description: q.string(),
       })
       .nullable(),
-    body: q('body')
-      .filter()
-      .select({
-        '_type == "block"': ['{...}', q.contentBlock()],
-        '_type == "image"': ['{...}', sanityImage('').schema],
-        '_type == "codeBlock"': [
-          '{...}',
-          q.object({
-            _key: q.string().nullable(),
-            _type: q.string(),
-            code: q.string(),
-            language: q.string(),
-          }),
-        ],
-        default: {
-          _key: q.string(),
-          _type: ['"unsupported"', q.literal('unsupported')],
-          unsupportedType: ['_type', q.string()],
-        },
-      }),
+    body,
   })
 
 export const postDirectoryQuery = q('*')
