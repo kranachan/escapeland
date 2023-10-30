@@ -23,6 +23,7 @@
     "astro": "^3.1.0",
     "astro-icon": "^0.8.1",
     "astro-portabletext": "^0.9.4",
+    "astro-seo": "^0.8.0",
     "clsx": "^2.0.0",
     "groqd": "^0.15.9",
     "medium-zoom": "^1.0.8",
