@@ -1,0 +1,71 @@
+.mf-cursor {
+  @apply transition-all duration-[30ms];
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 250;
+  direction: ltr;
+  contain: layout style size;
+  pointer-events: none;
+}
+
+.mf-cursor::before,
+.mf-cursor::after {
+  @apply transition-all duration-300;
+
+  content: '';
+  position: absolute;
+  display: block;
+  transform: scale(0.2);
+  border-radius: 50%;
+}
+
+.mf-cursor::before {
+  @apply bg-transparent border-white border-2;
+  @apply w-56 h-56 -top-28 -left-28;
+}
+
+.mf-cursor::after {
+  @apply bg-pink-500 border-white border-2;
+  @apply w-5 h-5 -top-2.5 -left-2.5;
+}
+
+.mf-cursor.-pointer {
+  @supports (mix-blend-mode: color-dodge) {
+    @apply mix-blend-color-dodge;
+  }
+
+  &::before {
+    @apply bg-[#85607a];
+
+    transform: scale(0.15);
+  }
+
+  &::after {
+    @apply hidden;
+  }
+}
+
+.mf-cursor.-text:before {
+  opacity: 0.85;
+  transform: scale(1.7);
+}
+
+.mf-cursor.-text.-active:before {
+  transform: scale(1.6);
+  transition-duration: 0.2s;
+}
+
+.mf-cursor.-icon:before {
+  transform: scale(1.5);
+}
+
+.mf-cursor.-icon.-active:before {
+  transform: scale(1.4);
+}
+
+.mf-cursor.-hidden:before,
+.mf-cursor.-hidden::after {
+  transform: scale(0);
+}
