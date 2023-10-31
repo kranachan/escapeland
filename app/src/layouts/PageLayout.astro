@@ -33,13 +33,15 @@ const { title } = Astro.props
       <slot />
     </main>
     <script>
-      import MouseFollower from 'mouse-follower'
-      import gsap from 'gsap'
+      if (window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('astro:page-load', async () => {
+          const { default: MouseFollower } = await import('mouse-follower')
+          const { default: gsap } = await import('gsap')
 
-      document.addEventListener('astro:page-load', () => {
-        MouseFollower.registerGSAP(gsap)
-        new MouseFollower()
-      })
+          MouseFollower.registerGSAP(gsap)
+          new MouseFollower()
+        })
+      }
     </script>
   </body>
 </html>
