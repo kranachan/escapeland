@@ -3,6 +3,8 @@ import me from '~/me.profile'
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'astro/types'
 import { twMerge } from 'tailwind-merge'
+import { Image } from 'astro:assets'
+import Logo from '~/../public/favicon.svg'
 
 const navigation = {
   BLOG: '/blog',
@@ -26,9 +28,9 @@ const { class: className, ...rest } = Astro.props
 
 <div class={clsx('flex flex-col gap-8 fixed left-6', className)} {...rest}>
   <a class="w-12 rounded-lg transition-all" href="/">
-    <img
+    <Image
       class="border-2 border-[#85607a]/30 rounded-lg"
-      src="/favicon.svg"
+      src={Logo}
       alt="Logo"
       draggable="false"
     />
