@@ -3,8 +3,9 @@ import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 import { urlForImage } from '~/sanity/image-builder'
 import { Picture } from 'astro:assets'
 import { getImageDimensions } from '@sanity/asset-utils'
+import type { HTMLAttributes } from 'astro/types'
 
-interface Props {
+interface Props extends HTMLAttributes<'picture'> {
   node: {
     asset: SanityAsset
     alt?: string | null
@@ -24,5 +25,5 @@ const dimensions = getImageDimensions(webpUrl)
   formats={['webp', 'avif', 'png', 'jpeg', 'jpg', 'svg']}
   draggable={false}
   alt={alt ?? '[picture]'}
-  {...rest}
+  pictureAttributes={rest}
 />
