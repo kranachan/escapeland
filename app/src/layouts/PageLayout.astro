@@ -8,22 +8,71 @@ import { ViewTransitions } from 'astro:transitions'
 import MobileNavigation from '~/components/mobile/MobileNavigation.astro'
 import '~/styles/mouse-follower.css'
 import { fetchProfile } from '~/store/profile'
+import { SEO } from 'astro-seo'
 
 interface Props {
   title?: string
+  seo?: Partial<{
+    image: string
+    description: string
+    article: Partial<{
+      publishedTime: string
+      tags: string[]
+    }>
+  }>
 }
-const { title } = Astro.props
+const { title = 'Untitled', seo = {} } = Astro.props
+
+const {
+  image = '/favicon.svg',
+  description = `Welcome to Escapeland, let's embark on an adventure now!`,
+  article,
+} = seo
+
+const url = Astro.request.url
 
 const profile = await fetchProfile()
+const { name } = profile
+
+const titleSuffix = `${name}'s Escapeland`
+const fullTitle = `${title} - ${titleSuffix}`
 ---
 
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title ?? 'Untitled'} - {profile.name}'s Escapeland</title>
+    <SEO
+      charset="utf-8"
+      title={fullTitle}
+      description={description}
+      twitter={{
+        card: 'summary',
+        image,
+        creator: name,
+        title: fullTitle,
+        description,
+        site: url,
+      }}
+      openGraph={{
+        basic: {
+          title: fullTitle,
+          type: article ? 'article' : 'website',
+          image,
+          url,
+        },
+        optional: {
+          siteName: titleSuffix,
+          description,
+        },
+        article: { authors: [name], ...article },
+      }}
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.svg' }],
+        meta: [
+          { name: 'viewport', content: 'width=device-width' },
+          { name: 'generator', content: Astro.generator },
+        ],
+      }}
+    />
     <ViewTransitions />
   </head>
   <body

@@ -5,6 +5,8 @@ import PageLayout from '~/layouts/PageLayout.astro'
 import { postsQuery } from '~/sanity/schemas/post'
 import Categories from '~/components/common/Categories.astro'
 import type { Post } from '~/sanity/schemas/post'
+import { urlForImage } from '~/sanity/image-builder'
+import { toPlainText } from 'astro-portabletext/utils'
 
 export async function getStaticPaths() {
   const posts = await runQuery(postsQuery)
@@ -20,10 +22,19 @@ export async function getStaticPaths() {
 
 interface Props extends Post {}
 
-const { publishedAt, categories, title, body } = Astro.props
+const { publishedAt, categories, title, body, mainImage } = Astro.props
+const tags = categories?.map((category) => category.title)
 ---
 
-<PageLayout title={`${title} | BLOG`}>
+<PageLayout
+  title={`${title} | BLOG`}
+  seo={{
+    image: urlForImage(mainImage.asset).url(),
+    // @ts-ignore
+    description: toPlainText(body),
+    article: { tags, publishedTime: publishedAt.toDateString() },
+  }}
+>
   <div class="grid grid-cols-1 sm:grid-cols-[3fr,1fr] gap-4 h-full">
     <div>
       <Categories categories={categories} />
