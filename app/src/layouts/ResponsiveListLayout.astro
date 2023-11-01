@@ -6,11 +6,38 @@ interface Props extends HTMLAttributes<'div'> {}
 const { class: className } = Astro.props
 ---
 
-<div
+<astro-list-layout
   class={clsx(
     'grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-8 pb-12',
     className,
   )}
 >
   <slot />
-</div>
+</astro-list-layout>
+
+<script>
+  import gsap from 'gsap'
+
+  class AstroListLayout extends HTMLElement {
+    constructor() {
+      super()
+      gsap.fromTo(
+        this.childNodes,
+        { opacity: 0.5, filter: 'blur(4px)' },
+        {
+          opacity: 1,
+          filter: 'blur(0px)',
+          ease: 'power1.inOut',
+          duration: 0.2,
+          delay: 0.225,
+          stagger: {
+            amount: 0.1,
+            from: 'start',
+          },
+        },
+      )
+    }
+  }
+
+  customElements.define('astro-list-layout', AstroListLayout)
+</script>
