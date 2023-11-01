@@ -2,10 +2,10 @@
 import PageLayout from '~/layouts/PageLayout.astro'
 import '@fontsource/bungee-shade'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
-import { $profile } from '~/store/profile'
+import { fetchProfile } from '~/store/profile'
 
-const profile = $profile.get()
-const { body, name } = profile.data
+const profile = await fetchProfile()
+const { body, name } = profile
 ---
 
 <PageLayout title={'⭐️'}>

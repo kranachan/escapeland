@@ -4,11 +4,11 @@ import type { HTMLAttributes } from 'astro/types'
 import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
-import { $profile } from '~/store/profile'
+import { fetchProfile } from '~/store/profile'
 
-const profile = $profile.get()
+const profile = await fetchProfile()
 
-const { contacts, repository } = profile.data
+const { contacts, repository } = profile
 
 const navigation = {
   BLOG: '/blog',
