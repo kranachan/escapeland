@@ -5,6 +5,7 @@ import sanity from '@sanity/astro'
 
 // https://astro.build/config
 export default defineConfig({
+  site: process.env.SECRET_DEPLOY_URL,
   image: {
     service: squooshImageService(),
   },
