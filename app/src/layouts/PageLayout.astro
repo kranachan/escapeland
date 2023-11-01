@@ -4,15 +4,34 @@ import Navigation from '~/components/common/Navigation.astro'
 import '@fontsource/dotgothic16'
 import '~/styles/crt-effect.css'
 import '~/styles/global.css'
-import me from '~/me.profile'
 import { ViewTransitions } from 'astro:transitions'
 import MobileNavigation from '~/components/mobile/MobileNavigation.astro'
 import '~/styles/mouse-follower.css'
+import { runQuery } from '~/sanity/run-query'
+import { profileQuery } from '~/sanity/schemas/profile'
+import { $profile } from '~/store/profile'
 
 interface Props {
   title?: string
 }
 const { title } = Astro.props
+
+const fetchProfile = async () => {
+  const storedProfile = $profile.get()
+
+  if (!storedProfile.isFetched) {
+    $profile.setKey('isFetched', true)
+    const response = await runQuery(profileQuery)
+
+    if (response) {
+      $profile.setKey('data', response)
+    }
+  }
+
+  return storedProfile.data
+}
+
+const profile = await fetchProfile()
 ---
 
 <html lang="en">
@@ -21,7 +40,7 @@ const { title } = Astro.props
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title ?? 'Untitled'} - {me.name}'s Escapeland</title>
+    <title>{title ?? 'Untitled'} - {profile.name}'s Escapeland</title>
     <ViewTransitions />
   </head>
   <body
