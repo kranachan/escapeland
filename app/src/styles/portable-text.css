@@ -1,39 +1,44 @@
 .portable-text {
-  @apply leading-10;
-}
+  @apply leading-5;
 
-blockquote[class~='portable-text'] {
-  @apply bg-[#dfdfdf]/20 px-4;
-}
+  &:is(em) {
+    @apply italic;
+  }
 
-em[class~='portable-text'] {
-  @apply italic;
-}
+  &:is(blockquote) {
+    @apply bg-[#dfdfdf]/10 px-4 py-2;
+    @apply border-x-4 border-[#85607a];
+  }
 
-li[class~='portable-text'] {
-  @apply list-item list-inside list-disc;
-}
+  &:is(li) {
+    @apply list-item list-inside list-disc;
+  }
 
-a[class~='portable-text'] {
-  @apply underline;
-}
+  &:is(a) {
+    @apply bg-[#85607a] px-1;
+  }
 
-h1[class~='portable-text'] {
-  @apply text-3xl leading-relaxed;
-}
+  &:is(picture) {
+    @apply block my-6;
+  }
 
-h2[class~='portable-text'] {
-  @apply text-2xl leading-relaxed;
-}
+  &:is(h1, h2, h3, h4) {
+    @apply leading-relaxed;
+  }
 
-h3[class~='portable-text'] {
-  @apply text-xl leading-relaxed;
-}
+  &:is(h1) {
+    @apply text-3xl;
+  }
 
-h4[class~='portable-text'] {
-  @apply text-lg leading-relaxed;
-}
+  &:is(h2) {
+    @apply text-2xl;
+  }
 
-img[class~='portable-text'] {
-  @apply my-4;
+  &:is(h3) {
+    @apply text-xl;
+  }
+
+  &:is(h4) {
+    @apply text-lg;
+  }
 }
