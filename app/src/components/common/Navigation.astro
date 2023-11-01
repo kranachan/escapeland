@@ -1,20 +1,26 @@
 ---
-import me from '~/me.profile'
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'astro/types'
 import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
+import { $profile } from '~/store/profile'
+
+const profile = $profile.get()
+
+const { contacts, repository } = profile.data
 
 const navigation = {
   BLOG: '/blog',
   ARTWORKS: '/artworks',
   ENGINEERING: '/engineering',
-  ...Object.entries(me.contacts).reduce(
+  ...Object.entries(contacts ?? []).reduce(
     (accumulator: { [key: string]: string }, [key, value]) => {
-      key === 'e-mail'
-        ? (accumulator[key.toUpperCase()] = `mailto:${value}`)
-        : (accumulator[key.toUpperCase()] = value)
+      if (key === 'email') {
+        accumulator['E-MAIL'] = `mailto:${value}`
+      } else {
+        accumulator[key.toUpperCase()] = value
+      }
       return accumulator
     },
     {},
@@ -56,7 +62,11 @@ const { class: className, ...rest } = Astro.props
       })
     }
   </aside>
-  <a class="fixed bottom-16 text-xs animate-bounce" href={me.repository}>
-    <i> * かぼちゃの馬車 *</i>
-  </a>
+  {
+    repository && (
+      <a class="fixed bottom-16 text-xs animate-bounce" href={repository}>
+        <i> * かぼちゃの馬車 *</i>
+      </a>
+    )
+  }
 </div>

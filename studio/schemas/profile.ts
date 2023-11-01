@@ -30,5 +30,11 @@ export default defineType({
         { name: 'email', title: 'Email', type: 'string' },
       ],
     }),
+    defineField({
+      name: 'repository',
+      title: 'Repository',
+      type: 'string',
+      description: 'Link to portfolio repository',
+    }),
   ],
 })
