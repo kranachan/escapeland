@@ -4,8 +4,11 @@ import PortableTextImage from './PortableTextImage.astro'
 import CodeBlock from './CodeBlock.astro'
 import type { PortableTextProps } from 'astro-portabletext/types'
 import '~/styles/portable-text.css'
+import clsx from 'clsx'
 
-interface Props extends PortableTextProps {}
+interface Props extends PortableTextProps {
+  class?: string
+}
 
 const components = {
   type: {
@@ -13,10 +16,12 @@ const components = {
     codeBlock: CodeBlock,
   },
 }
+
+const { class: className, ...rest } = Astro.props
 ---
 
 <PortableTextInternal
-  class={'portable-text'}
+  class={clsx('portable-text', className)}
   components={components}
-  {...Astro.props}
+  {...rest}
 />
