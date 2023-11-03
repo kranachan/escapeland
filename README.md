@@ -26,15 +26,15 @@ A CRT-style portfolio template powered by Sanity.
 - [ ] TOC
 - [ ] Posts directory
 
-## One-click deploy
+## One-click deployment
 
 <div style="display: flex; gap: 4px;">
   <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmiyakoochi%2Fescapeland&root-directory=app&env=SECRET_PROJECT_ID,SECRET_DATASET,SECRET_DEPLOY_URL&envDescription=Fill%20in%20the%20Sanity%20projectId%2C%20dataset%2C%20and%20deployment%20URL.&envLink=https%3A%2F%2Fgithub.com%2Fmiyakoochi%2Fescapeland%23environment-variables&project-name=escapeland-app&repository-name=escapeland">
     <img src="https://vercel.com/button" alt="Deploy with Vercel"/>
   </a>
 
-  <a href="https://minakami.land/post/escapeland-deploy-guide">
-    <img width="92" src="https://image.nostr.build/87a059648e1eabb2ffadd2204ba65e2156e0a6b4613930be5d2b41126de9c992.png" alt="Deploy Guide" />
+  <a href="https://minakami.land/post/escapeland-deployment-guide">
+    <img height="32" src="https://image.nostr.build/8ff7f8073238f867f2f06b678d76c2960d84ffd12fe2144a64e060bf4180ab5c.png" alt="Deployment Guide" />
   </a>
 </div>
 
