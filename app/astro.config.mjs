@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind'
 import sanity from '@sanity/astro'
 import vercel from '@astrojs/vercel/static'
 import sitemap from '@astrojs/sitemap'
+import robotsTxt from 'astro-robots-txt'
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
   }),
   integrations: [
     sitemap(),
+    robotsTxt(),
     tailwind(),
     sanity({
       projectId: process.env.SECRET_PROJECT_ID,
