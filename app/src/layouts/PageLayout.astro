@@ -20,7 +20,7 @@ interface Props {
     }>
   }>
 }
-const { title = 'Untitled', seo = {} } = Astro.props
+const { title, seo = {} } = Astro.props
 
 const {
   image = '/favicon.svg',
@@ -34,7 +34,7 @@ const profile = await fetchProfile()
 const { name } = profile
 
 const titleSuffix = `${name}'s Escapeland`
-const fullTitle = `${title} - ${titleSuffix}`
+const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
 ---
 
 <html lang="en">
