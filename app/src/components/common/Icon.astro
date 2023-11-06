@@ -1,27 +1,8 @@
 ---
 import { Icon as IconInternal } from 'astro-icon'
-import type { SVGAttributes } from 'react'
+import type { HTMLAttributes } from 'astro/types'
 
-interface Props extends SVGAttributes<SVGElement> {
-  name: string
-  pack?: string
-  optimize?: boolean
-  fill?: string
-  'fill-opacity'?: number | string
-  'fill-rule'?: 'nonzero' | 'evenodd' | 'inherit'
-  height?: number | string
-  size?: number | string
-  stroke?: string
-  'stroke-dasharray'?: string | number
-  'stroke-dashoffset'?: string | number
-  'stroke-linecap'?: 'butt' | 'round' | 'square' | 'inherit'
-  'stroke-linejoin'?: 'miter' | 'round' | 'bevel' | 'inherit'
-  'stroke-miterlimit'?: number | string
-  'stroke-opacity'?: number | string
-  'stroke-width'?: number | string
-  viewBox?: string
-  width?: number | string
-}
+interface Props extends HTMLAttributes<'svg'> {}
 ---
 
 <IconInternal pack="pixelarticons" size="16" {...Astro.props} />
