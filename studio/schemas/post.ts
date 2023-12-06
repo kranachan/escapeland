@@ -39,11 +39,20 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'isPostListVisible',
+      title: 'The item is visible in the post list',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
     }),
   ],
+
+  initialValue: {
+    isPostListVisible: true,
+  },
 
   preview: {
     select: {

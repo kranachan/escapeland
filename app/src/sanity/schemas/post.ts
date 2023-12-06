@@ -12,6 +12,7 @@ export const postsQuery = q('*')
     title: q.string(),
     publishedAt: q.date(),
     mainImage: sanityImage('mainImage'),
+    isPostListVisible: q.boolean(),
     categories: q('categories')
       .filter()
       .deref()
