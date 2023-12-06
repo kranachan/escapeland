@@ -28,7 +28,7 @@
     @apply opacity-0;
 
     background: rgba(18, 16, 16, 0.1);
-    animation: flicker 0.15s infinite;
+    /* animation: flicker 0.15s infinite; */
   }
 }
 
