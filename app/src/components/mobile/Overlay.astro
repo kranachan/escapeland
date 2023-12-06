@@ -9,7 +9,7 @@ const { class: className, ...rest } = Astro.props
 
 <astro-overlay
   class={clsx(
-    'invisible opacity-0 sm:hidden fixed top-0 left-0 w-full min-h-screen h-[100dvh] bg-accent-overlay-gradient transition-all duration-300',
+    'invisible opacity-0 sm:hidden fixed top-0 left-0 w-full min-h-screen h-[100dvh] bg-background/95 transition-all duration-300',
     className,
   )}
   {...rest}
