@@ -8,7 +8,9 @@ import Categories from '~/components/common/Categories.astro'
 import { sortDescendingByDate } from '~/utils/sort'
 import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
 
-const posts = await runQuery(postsQuery)
+const posts = (await runQuery(postsQuery)).filter(
+  (post) => post.isPostListVisible,
+)
 ---
 
 <PageLayout title={'BLOG'}>
