@@ -84,15 +84,26 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
       <slot />
     </main>
     <script>
-      if (window.matchMedia('(pointer: fine)').matches) {
-        document.addEventListener('astro:page-load', async () => {
+      import Lenis from '@studio-freight/lenis'
+
+      document.addEventListener('astro:page-load', async () => {
+        const lenis = new Lenis()
+
+        const raf = (time: DOMHighResTimeStamp) => {
+          lenis.raf(time)
+          requestAnimationFrame(raf)
+        }
+
+        requestAnimationFrame(raf)
+
+        if (window.matchMedia('(pointer: fine)').matches) {
           const { default: MouseFollower } = await import('mouse-follower')
           const { default: gsap } = await import('gsap')
 
           MouseFollower.registerGSAP(gsap)
           new MouseFollower()
-        })
-      }
+        }
+      })
     </script>
   </body>
 </html>
