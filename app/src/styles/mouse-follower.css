@@ -37,7 +37,7 @@
   }
 
   &::before {
-    @apply bg-[#85607a];
+    @apply bg-primary;
 
     transform: scale(0.15);
   }

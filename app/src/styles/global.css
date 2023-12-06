@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --colors-primary: 133 96 122;
+  --colors-background: 18 13 14;
+  --colors-container: 223 223 223;
+  --colors-on-background: 255 255 255;
+  --colors-on-container: 255 255 255;
+}
+
 @layer utilities {
   .hidden-scrollbar {
     -ms-overflow-style: none;
@@ -15,8 +23,8 @@
   .bg-accent-gradient-to-t {
     background: linear-gradient(
       transparent 0,
-      rgba(129, 98, 123, 0.8) 64%,
-      #85607a 100%
+      rgba(var(--colors-primary) / 0.8) 64%,
+      theme('colors.primary') 100%
     );
   }
 
@@ -24,8 +32,8 @@
     background: linear-gradient(
       225deg,
       transparent 0,
-      rgba(129, 98, 123, 0.875) 64%,
-      #85607a 100%
+      rgba(var(--colors-primary) / 0.8) 64%,
+      theme('colors.primary') 100%
     );
   }
 
@@ -37,7 +45,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      @apply bg-[#85607a];
+      @apply bg-primary;
     }
   }
 }
@@ -57,8 +65,8 @@ a {
 }
 
 html {
-  @apply bg-[#120d0e] text-white;
-  @apply selection:bg-[#85607a];
+  @apply bg-background text-on-background;
+  @apply selection:bg-primary;
 
   -webkit-tap-highlight-color: transparent;
 }
