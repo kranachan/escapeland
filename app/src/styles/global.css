@@ -23,16 +23,7 @@
   .bg-accent-gradient-to-t {
     background: linear-gradient(
       transparent 0,
-      rgba(var(--colors-primary) / 0.8) 64%,
-      theme('colors.primary') 100%
-    );
-  }
-
-  .bg-accent-overlay-gradient {
-    background: linear-gradient(
-      225deg,
-      transparent 0,
-      rgba(var(--colors-primary) / 0.8) 64%,
+      rgba(var(--colors-primary) / 0.75) 64%,
       theme('colors.primary') 100%
     );
   }
