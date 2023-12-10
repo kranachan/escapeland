@@ -1,5 +1,5 @@
 .portable-text {
-  @apply leading-5;
+  @apply leading-8;
 
   &:is(em) {
     @apply italic;
@@ -36,5 +36,10 @@
 
   &:is(h4) {
     @apply text-lg;
+  }
+
+  /* Min height for newline character */
+  &:is(p) {
+    @apply min-h-[1rem];
   }
 }
