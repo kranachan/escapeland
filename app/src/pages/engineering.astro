@@ -19,7 +19,7 @@ const products = await runQuery(productsQuery)
           const { mainImage, website, github, ...article } = product
           return (
             <article>
-              <a href={website}>
+              <a href={website} target="_blank">
                 <WithArticle article={article}>
                   <PortableTextImage
                     class="mb-2"

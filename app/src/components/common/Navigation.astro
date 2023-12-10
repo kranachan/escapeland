@@ -46,6 +46,7 @@ const { class: className, ...rest } = Astro.props
       Object.entries(navigation).map(([title, route]) => {
         const isProd = import.meta.env.PROD
         const isActive = (isProd ? `${route}/` : route) === Astro.url.pathname
+        const isContact = Object.values(contacts ?? {}).includes(route)
         return (
           <a
             class={twMerge(
@@ -54,6 +55,7 @@ const { class: className, ...rest } = Astro.props
               !isActive && 'hover:font-bold hover:opacity-100',
             )}
             href={route}
+            target={isContact ? '_blank' : '_self'}
           >
             {title}
             {isActive && <i>*</i>}
@@ -64,7 +66,11 @@ const { class: className, ...rest } = Astro.props
   </aside>
   {
     repository && (
-      <a class="fixed bottom-16 text-xs animate-bounce" href={repository}>
+      <a
+        class="fixed bottom-16 text-xs animate-bounce"
+        href={repository}
+        target="_blank"
+      >
         <i> * かぼちゃの馬車 *</i>
       </a>
     )
