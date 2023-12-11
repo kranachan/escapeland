@@ -42,8 +42,6 @@ A CRT-style portfolio template powered by Sanity.
 
 ### Prerequisites
 
-You will need to have the following software installed on your machine:
-
 - Bun >= 0.7.0
 - A modern web browser
 - Sanity's project id and dataset
@@ -66,10 +64,13 @@ You will need to have the following software installed on your machine:
 <table>
  <tr>
     <td>
-      <img src="https://image.nostr.build/bdd306e048082f9c9b3c5bd86a9ed61de3238ceacd74823ede0d505d69cb8e64.png" alt="application-preview" />
+      <img src="https://image.nostr.build/b0547028847c627b90580d7fa49f814f2dbc2012eac7ab5fd281bd8d078abbce.jpg" alt="application-dark-preview" />
     </td>
     <td>
-      <img src="https://image.nostr.build/59d67d523cd9523df58e1e1de2ec3ec007a28656359f3ff8b605d52b6b63d6a5.png" alt="studio-preview" />
+      <img src="https://image.nostr.build/470a4102b5a298db445c9bd24c8cbcf7d8d1f887385cbff28a33a52a77361d8a.jpg" alt="application-light-preview" />
+    </td>
+    <td>
+      <img src="https://image.nostr.build/128b9e6cf53cffcea8da6ae43492b954af786d16a335effc363f49a0b7ec9121.jpg" alt="studio-preview" />
     </td>
  </tr>
 </table>
