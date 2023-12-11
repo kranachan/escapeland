@@ -3,14 +3,14 @@ import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 import { urlForImage } from '~/sanity/image-builder'
 import { Picture } from 'astro:assets'
 import { getImageDimensions } from '@sanity/asset-utils'
+import type { Props as $, Block } from 'astro-portabletext/types'
 
-interface Props {
-  node: {
+type Props = $<
+  {
     asset: SanityAsset
     alt?: string | null
-  }
-  class: string
-}
+  } & Block
+>
 
 const { node, class: className, ...rest } = Astro.props
 const { asset, alt } = node
