@@ -14,7 +14,7 @@
     "@studio-freight/lenis": "^1.0.29",
     "astro": "^3.4.2",
     "astro-icon": "^0.8.1",
-    "astro-portabletext": "^0.9.4",
+    "astro-portabletext": "^0.9.6",
     "astro-seo": "^0.8.0",
     "clsx": "^2.0.0",
     "groqd": "^0.15.9",
