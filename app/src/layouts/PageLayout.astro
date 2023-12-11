@@ -81,10 +81,8 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
   <body
     class="flex sm:justify-end p-8 pt-16 pb-24 sm:p-16 font-dotgothic16 min-h-screen"
   >
-    <div
-      class="fixed top-0 left-0 z-20 w-full h-screen pointer-events-none border-[6px] border-t-0 border-primary"
-    >
-      <section class="flex items-center justify-center w-full h-8 bg-primary">
+    <div class="app-window-layout">
+      <section class="app-window-title-bar">
         <Image
           src={Logo}
           alt="Logo"
@@ -100,6 +98,26 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <main class="w-full sm:flex-[0_0_calc(100%_-_8rem)]">
       <slot />
     </main>
+    <style>
+      .app-window-layout {
+        @apply fixed top-0 left-0 z-20;
+        @apply w-full h-screen;
+        @apply pointer-events-none;
+
+        > .app-window-title-bar {
+          @apply flex items-center justify-center;
+          @apply w-full h-8 bg-primary px-1.5;
+        }
+
+        @media (pointer: fine) {
+          @apply border-[0.375rem] border-t-0 border-primary;
+
+          > .app-window-title-bar {
+            @apply px-0;
+          }
+        }
+      }
+    </style>
     <script>
       import Lenis from '@studio-freight/lenis'
 
