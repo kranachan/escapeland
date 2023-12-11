@@ -41,7 +41,6 @@ html.dark {
   }
 }
 
-astro-overlay-trigger,
 button,
 a {
   @apply cursor-pointer;
