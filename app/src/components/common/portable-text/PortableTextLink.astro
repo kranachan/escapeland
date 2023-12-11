@@ -1,0 +1,17 @@
+---
+import type { Props as $, Mark } from 'astro-portabletext/types'
+import clsx from 'clsx'
+
+type Props = $<Mark<{ href: string }>>
+
+const { node, class: className } = Astro.props
+---
+
+<a
+  class={clsx('portable-text', className)}
+  href={node.markDef.href}
+  target="_blank"
+  rel="noreferrer"
+>
+  <slot />
+</a>

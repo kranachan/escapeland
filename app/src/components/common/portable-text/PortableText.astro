@@ -1,6 +1,7 @@
 ---
 import { PortableText as PortableTextInternal } from 'astro-portabletext'
 import PortableTextImage from './PortableTextImage.astro'
+import PortableTextLink from './PortableTextLink.astro'
 import CodeBlock from './CodeBlock.astro'
 import type { PortableTextProps } from 'astro-portabletext/types'
 import '~/styles/portable-text.css'
@@ -14,6 +15,9 @@ const components = {
   type: {
     image: PortableTextImage,
     codeBlock: CodeBlock,
+  },
+  mark: {
+    link: PortableTextLink,
   },
 }
 
