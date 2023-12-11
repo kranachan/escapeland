@@ -8,7 +8,7 @@ import { fetchProfile } from '~/store/profile'
 
 const profile = await fetchProfile()
 
-const { contacts, repository } = profile
+const { contacts } = profile
 
 const navigation = {
   BLOG: '/blog',
@@ -33,9 +33,9 @@ const { class: className, ...rest } = Astro.props
 ---
 
 <div class={clsx('flex flex-col gap-8 fixed left-6', className)} {...rest}>
-  <a class="w-12 rounded-lg transition-all" href="/">
+  <a class="w-12 transition-all" href="/">
     <Image
-      class="border-2 border-primary/30 rounded-lg"
+      class="border-2 bg-primary border-primary/30 rounded-lg"
       src={Logo}
       alt="Logo"
       draggable="false"
@@ -64,15 +64,4 @@ const { class: className, ...rest } = Astro.props
       })
     }
   </aside>
-  {
-    repository && (
-      <a
-        class="fixed bottom-16 text-xs animate-bounce"
-        href={repository}
-        target="_blank"
-      >
-        <i> * かぼちゃの馬車 *</i>
-      </a>
-    )
-  }
 </div>

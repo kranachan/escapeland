@@ -9,12 +9,12 @@ const { class: className, ...rest } = Astro.props
 
 <astro-overlay-trigger
   class={clsx(
-    'sm:hidden fixed left-0 bottom-0 w-full h-16 flex justify-center items-center bg-accent-gradient-to-t',
+    'sm:hidden fixed left-0 bottom-0 w-8 h-8 flex justify-center items-center bg-primary',
     className,
   )}
   {...rest}
 >
-  +
+  ≡
 </astro-overlay-trigger>
 
 <script>
@@ -34,7 +34,7 @@ const { class: className, ...rest } = Astro.props
           this.innerText = '✕'
         } else {
           document.body.classList.remove('overflow-hidden')
-          this.innerText = '+'
+          this.innerText = '≡'
         }
       })
     }

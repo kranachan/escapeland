@@ -20,7 +20,6 @@ export const profileQuery = q('*')
         email: q.string().optional(),
       })
       .optional(),
-    repository: q.string().optional(),
   })
   .slice(0)
   .nullable()
