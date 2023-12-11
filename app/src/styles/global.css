@@ -2,7 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+html.light {
+  --colors-primary: 227 217 232;
+  --colors-background: 244 244 244;
+  --colors-container: 223 223 223;
+  --colors-on-background: 18 13 14;
+  --colors-on-container: 18 13 14;
+}
+
+html.dark {
   --colors-primary: 133 96 122;
   --colors-background: 18 13 14;
   --colors-container: 223 223 223;
@@ -18,14 +26,6 @@
     &::-webkit-scrollbar {
       @apply hidden;
     }
-  }
-
-  .bg-accent-gradient-to-t {
-    background: linear-gradient(
-      transparent 0,
-      rgba(var(--colors-primary) / 0.75) 64%,
-      theme('colors.primary') 100%
-    );
   }
 
   .thin-scrollbar {

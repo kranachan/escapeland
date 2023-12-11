@@ -8,6 +8,9 @@ import MobileNavigation from '~/components/mobile/MobileNavigation.astro'
 import '~/styles/mouse-follower.css'
 import { fetchProfile } from '~/store/profile'
 import { SEO } from 'astro-seo'
+import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
+import { Image } from 'astro:assets'
+import Logo from '~/../public/favicon.svg'
 
 interface Props {
   title?: string
@@ -37,7 +40,7 @@ const titleSuffix = `${name}'s Escapeland`
 const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
 ---
 
-<html lang="en">
+<html lang="en" class="dark bg-effect-crt">
   <head>
     <SEO
       charset="utf-8"
@@ -76,8 +79,22 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body
-    class="flex sm:justify-end p-8 pb-24 sm:p-16 bg-effect-crt font-dotgothic16 min-h-screen"
+    class="flex sm:justify-end p-8 pt-16 pb-24 sm:p-16 font-dotgothic16 min-h-screen"
   >
+    <div
+      class="fixed top-0 left-0 z-20 w-full h-screen pointer-events-none border-[6px] border-t-0 border-primary"
+    >
+      <section class="flex items-center justify-center w-full h-8 bg-primary">
+        <Image
+          src={Logo}
+          alt="Logo"
+          width={20}
+          class="mr-2 border border-on-background/10 rounded-md"
+        />
+        <span class="text-sm w-3/4 truncate">{fullTitle}</span>
+        <ColorSchemeToggle class="ml-auto pointer-events-auto" />
+      </section>
+    </div>
     <Navigation class="hidden sm:flex" />
     <MobileNavigation />
     <main class="w-full sm:flex-[0_0_calc(100%_-_8rem)]">
