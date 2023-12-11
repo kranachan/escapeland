@@ -9,7 +9,7 @@ const { class: className, ...rest } = Astro.props
 
 <astro-overlay-trigger
   class={clsx(
-    'sm:hidden fixed left-0 bottom-0 w-8 h-8 flex justify-center items-center bg-primary',
+    'sm:hidden fixed right-4 bottom-4 w-12 h-12 text-xl rounded-lg flex justify-center items-center bg-primary shadow-lg cursor-pointer',
     className,
   )}
   {...rest}
@@ -31,10 +31,10 @@ const { class: className, ...rest } = Astro.props
       $isMobileNavOpen.subscribe((isOpen) => {
         if (isOpen) {
           document.body.classList.add('overflow-hidden')
-          this.innerText = '✕'
+          this.classList.add('brightness-75')
         } else {
           document.body.classList.remove('overflow-hidden')
-          this.innerText = '≡'
+          this.classList.remove('brightness-75')
         }
       })
     }
