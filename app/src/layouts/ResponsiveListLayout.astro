@@ -22,7 +22,7 @@ const { class: className } = Astro.props
     constructor() {
       super()
       gsap.fromTo(
-        this.childNodes,
+        this.children,
         { opacity: 0.5, filter: 'blur(4px)' },
         {
           opacity: 1,
