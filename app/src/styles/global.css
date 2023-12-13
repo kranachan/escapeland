@@ -43,7 +43,7 @@ html.dark {
 
 button,
 a {
-  @apply cursor-pointer;
+  @apply cursor-pointer transition-all;
 
   &:hover {
     @apply brightness-75;
