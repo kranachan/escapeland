@@ -32,7 +32,13 @@ export interface Props extends HTMLAttributes<'div'> {}
 const { class: className, ...rest } = Astro.props
 ---
 
-<div class={clsx('flex flex-col gap-8 fixed left-6', className)} {...rest}>
+<div
+  class={clsx(
+    'flex flex-col gap-8 fixed left-6 text-sm tracking-wider',
+    className,
+  )}
+  {...rest}
+>
   <a class="w-12 transition-all" href="/">
     <Image
       class="border-2 bg-primary border-primary/30 rounded-lg"
@@ -41,7 +47,7 @@ const { class: className, ...rest } = Astro.props
       draggable="false"
     />
   </a>
-  <aside class="flex flex-col gap-4 text-sm tracking-wider ml-1">
+  <aside class="flex flex-col gap-4 ml-1">
     {
       Object.entries(navigation).map(([title, route]) => {
         const isProd = import.meta.env.PROD
