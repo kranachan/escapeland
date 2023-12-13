@@ -1,7 +1,7 @@
 .mf-cursor {
   @apply transition-all duration-[30ms];
   @supports (mix-blend-mode: color-dodge) {
-    @apply mix-blend-color-dodge;
+    @apply mix-blend-multiply dark:mix-blend-color-dodge;
   }
 
   position: fixed;
@@ -14,7 +14,7 @@
 }
 
 .mf-cursor::before {
-  @apply bg-primary border-on-background/80 border;
+  @apply bg-primary dark:bg-primary dark:border-on-background/80 dark:border;
   @apply w-48 h-48 -top-24 -left-24;
   @apply transition-all duration-300;
 
@@ -27,8 +27,6 @@
 
 .mf-cursor.-pointer {
   &::before {
-    @apply bg-primary;
-
     transform: scale(0.15);
   }
 }
@@ -53,4 +51,10 @@
 
 .mf-cursor.-hidden:before {
   transform: scale(0);
+}
+
+.mf-cursor.-media {
+  @supports (mix-blend-mode: color-dodge) {
+    @apply mix-blend-color-dodge;
+  }
 }

@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types'
 import clsx from 'clsx'
 
 interface Props extends HTMLAttributes<'button'> {}
-const { class: className } = Astro.props
+const { class: className, ...rest } = Astro.props
 ---
 
 <astro-color-scheme-toggle
@@ -12,6 +12,8 @@ const { class: className } = Astro.props
     className,
   )}
   transition:persist
+  data-cursor="-pointer"
+  {...rest}
 >
   <svg
     width="20"
