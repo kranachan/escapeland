@@ -10,12 +10,14 @@
 }
 
 .medium-zoom--opened .medium-zoom-overlay {
+  z-index: 30;
   cursor: pointer;
   cursor: zoom-out;
   opacity: 1;
 }
 
 .medium-zoom-image {
+  z-index: 40;
   cursor: pointer;
   cursor: zoom-in;
   transition: transform 300ms cubic-bezier(0.2, 0, 0.2, 1) !important;

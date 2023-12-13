@@ -1,0 +1,37 @@
+---
+import '~/styles/medium-zoom.css'
+import type { HTMLAttributes } from 'astro/types'
+interface Props extends HTMLAttributes<'div'> {}
+---
+
+<astro-zoomable {...Astro.props}>
+  <slot />
+</astro-zoomable>
+
+<script>
+  import mediumZoom from 'medium-zoom'
+  class AstroZoomable extends HTMLElement {
+    constructor() {
+      super()
+      const image = this.querySelectorAll('[data-zoomable]')
+
+      const zoom = mediumZoom(image, {
+        background: 'rgba(0, 0, 0, 0.9)',
+      })
+
+      zoom.on('open', () => {
+        document.body.style.overflow = 'hidden'
+      })
+
+      zoom.on('closed', () => {
+        document.body.style.overflow = 'auto'
+      })
+
+      this.addEventListener('click', () => {
+        zoom.open()
+      })
+    }
+  }
+
+  customElements.define('astro-zoomable', AstroZoomable)
+</script>
