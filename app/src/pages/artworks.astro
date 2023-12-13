@@ -4,9 +4,9 @@ import { runQuery } from '~/sanity/run-query'
 import PortableTextImage from '~/components/common/portable-text/PortableTextImage.astro'
 import { atrworksQuery } from '~/sanity/schemas/artwork'
 import WithArticle from '~/components/common/WithArticle.astro'
-import '~/styles/medium-zoom.css'
 import { sortDescendingByDate } from '~/utils/sort'
 import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
+import Zoomable from '~/components/common/Zoomable.astro'
 
 const artworks = await runQuery(atrworksQuery)
 ---
@@ -18,7 +18,7 @@ const artworks = await runQuery(atrworksQuery)
         {artworks.sort(sortDescendingByDate('publishedAt')).map((artwork) => {
           const { illustration, ...article } = artwork
           return (
-            <astro-zoomable>
+            <Zoomable>
               <WithArticle class="cursor-zoom-in" article={article}>
                 <PortableTextImage
                   data-zoomable
@@ -26,38 +26,10 @@ const artworks = await runQuery(atrworksQuery)
                   node={{ asset: illustration.asset }}
                 />
               </WithArticle>
-            </astro-zoomable>
+            </Zoomable>
           )
         })}
       </ResponsiveListLayout>
     )
   }
 </PageLayout>
-
-<script>
-  import mediumZoom from 'medium-zoom'
-  class AstroZoomable extends HTMLElement {
-    constructor() {
-      super()
-      const image = this.querySelectorAll('[data-zoomable]')
-
-      const zoom = mediumZoom(image, {
-        background: 'rgba(0, 0, 0, 0.9)',
-      })
-
-      zoom.on('open', () => {
-        document.body.style.overflow = 'hidden'
-      })
-
-      zoom.on('closed', () => {
-        document.body.style.overflow = 'auto'
-      })
-
-      this.addEventListener('click', () => {
-        zoom.open()
-      })
-    }
-  }
-
-  customElements.define('astro-zoomable', AstroZoomable)
-</script>
