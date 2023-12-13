@@ -7,6 +7,7 @@ import WithArticle from '~/components/common/WithArticle.astro'
 import Icon from '~/components/common/Icon.astro'
 import { sortDescendingByDate } from '~/utils/sort'
 import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
+import SanityPicture from '~/components/common/SanityPicture.astro'
 
 const products = await runQuery(productsQuery)
 ---
@@ -21,10 +22,7 @@ const products = await runQuery(productsQuery)
             <article>
               <a href={website} target="_blank">
                 <WithArticle article={article}>
-                  <PortableTextImage
-                    class="mb-2"
-                    node={{ asset: mainImage.asset }}
-                  />
+                  <SanityPicture class="mb-2" asset={mainImage.asset} />
                 </WithArticle>
               </a>
               {github && (

@@ -7,6 +7,7 @@ import WithArticle from '~/components/common/WithArticle.astro'
 import { sortDescendingByDate } from '~/utils/sort'
 import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
 import Zoomable from '~/components/common/Zoomable.astro'
+import SanityPicture from '~/components/common/SanityPicture.astro'
 
 const artworks = await runQuery(atrworksQuery)
 ---
@@ -20,10 +21,10 @@ const artworks = await runQuery(atrworksQuery)
           return (
             <Zoomable>
               <WithArticle class="cursor-zoom-in" article={article}>
-                <PortableTextImage
+                <SanityPicture
                   data-zoomable
                   class="mb-2"
-                  node={{ asset: illustration.asset }}
+                  asset={illustration.asset}
                 />
               </WithArticle>
             </Zoomable>

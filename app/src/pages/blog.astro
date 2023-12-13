@@ -7,6 +7,7 @@ import WithArticle from '~/components/common/WithArticle.astro'
 import Categories from '~/components/common/Categories.astro'
 import { sortDescendingByDate } from '~/utils/sort'
 import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
+import SanityPicture from '~/components/common/SanityPicture.astro'
 
 const posts = (await runQuery(postsQuery)).filter(
   (post) => post.isPostListVisible,
@@ -18,14 +19,11 @@ const posts = (await runQuery(postsQuery)).filter(
     posts && (
       <ResponsiveListLayout>
         {posts.sort(sortDescendingByDate('publishedAt')).map((post) => {
-          const { slug, categories, ...article } = post
+          const { slug, categories, mainImage, ...article } = post
           return (
             <a href={`/post/${slug}`}>
               <WithArticle article={article}>
-                <PortableTextImage
-                  class="mb-2"
-                  node={{ asset: post.mainImage.asset }}
-                />
+                <SanityPicture class="mb-2" asset={mainImage.asset} />
                 <Categories categories={categories} />
               </WithArticle>
             </a>
