@@ -1,8 +1,7 @@
 ---
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
-import { urlForImage } from '~/sanity/image-builder'
-import { Picture } from 'astro:assets'
-import { getImageDimensions } from '@sanity/asset-utils'
+import Zoomable from '../Zoomable.astro'
+import SanityPicture from '../SanityPicture.astro'
 
 interface Props {
   node: {
@@ -12,20 +11,9 @@ interface Props {
   class?: string | undefined | null
 }
 
-const { node, class: className, ...rest } = Astro.props
-const { asset, alt } = node
-const webpUrl = urlForImage(asset).format('webp').url()
-const dimensions = getImageDimensions(webpUrl)
+const { node, class: className } = Astro.props
 ---
 
-<Picture
-  data-cursor="-media"
-  src={webpUrl}
-  width={dimensions.width}
-  height={dimensions.height}
-  formats={['webp', 'avif', 'png', 'jpeg', 'jpg', 'svg']}
-  draggable={false}
-  alt={alt ?? '[picture]'}
-  pictureAttributes={{ class: className }}
-  {...rest}
-/>
+<Zoomable>
+  <SanityPicture class={className} data-zoomable {...node} />
+</Zoomable>
