@@ -11,6 +11,6 @@
     "prettier": "^3.0.0"
   },
   "scripts": {
-    "format": "npx prettier --write ."
+    "format": "bunx prettier --write ."
   }
 }
