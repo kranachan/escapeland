@@ -56,7 +56,7 @@ a {
 
 html {
   @apply bg-background text-on-background;
-  @apply selection:bg-primary;
+  @apply selection:bg-primary/50;
 
   -webkit-tap-highlight-color: transparent;
 }
