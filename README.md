@@ -11,20 +11,21 @@ A CRT-style portfolio template powered by Sanity.
 
 - Blog (Posts)
 - Artworks (Gallery)
-- Engineering (Showcase projects)
-- Contacts (Email and social links)
-- Sanity Studio as the CMS
-- Human unreadable CRT style (＞＜)
+- Engineering (Showcase Projects)
+- Contact (E-mail & Social Links)
+- Responsive Layout
+- Dark theme with CRT
+- Web Graphics
 </div>
 
 ## Next steps
 
-- [ ] Preview post
-- [ ] URL parser
+- [ ] Preview Post
+- [ ] URL Parser
 - [ ] Share
 - [ ] Pagination
 - [ ] TOC
-- [ ] Posts directory
+- [ ] Posts Directory
 
 ## One-click deployment
 
