@@ -79,7 +79,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body
-    class="flex sm:justify-end p-8 pt-16 pb-24 sm:p-16 font-dotgothic16 min-h-screen"
+    class="flex sm:justify-end px-8 pt-16 pb-24 sm:pl-48 font-dotgothic16 min-h-screen"
   >
     <div class="app-window-layout">
       <section class="app-window-title-bar">
@@ -95,7 +95,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     </div>
     <Navigation class="hidden sm:flex" />
     <MobileNavigation />
-    <main class="w-full sm:flex-[0_0_calc(100%_-_8rem)]">
+    <main class="w-full">
       <slot />
     </main>
     <style>
