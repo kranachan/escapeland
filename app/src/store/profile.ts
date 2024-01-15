@@ -12,10 +12,10 @@ export const $profile = map<{ data: NonNullable<Profile>; isFetched: boolean }>(
 
 export const fetchProfile = async (): Promise<NonNullable<Profile>> => {
   if (!$profile.get().isFetched) {
-    $profile.setKey('isFetched', true)
     const response = await runQuery(profileQuery)
 
     if (response) {
+      $profile.setKey('isFetched', true)
       $profile.setKey('data', response)
     }
   }
