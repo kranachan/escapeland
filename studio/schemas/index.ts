@@ -4,6 +4,7 @@ import category from './category'
 import product from './product'
 import post from './post'
 import profile from './profile'
+import graphic from './graphic'
 
 export const schemaTypes = [
   profile,
@@ -12,4 +13,5 @@ export const schemaTypes = [
   product,
   category,
   blockContent,
+  graphic,
 ]

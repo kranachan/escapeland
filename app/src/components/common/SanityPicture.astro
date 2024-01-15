@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { asset, alt, class: className, ...rest } = Astro.props
-const webpUrl = urlForImage(asset).format('webp').url()
+const webpUrl = urlForImage(asset).auto('format').url()
 const dimensions = getImageDimensions(webpUrl)
 ---
 

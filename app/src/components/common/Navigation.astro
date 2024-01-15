@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge'
 import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
 import { fetchProfile } from '~/store/profile'
+import Graphics from './Graphics.astro'
 
 const profile = await fetchProfile()
 
@@ -34,40 +35,43 @@ const { class: className, ...rest } = Astro.props
 
 <div
   class={clsx(
-    'flex flex-col gap-8 fixed left-6 text-sm tracking-wider',
+    'w-[calc(100%_-_3rem)] sm:w-auto sm:h-[calc(100%_-_8rem)] flex sm:flex-col gap-8 fixed left-6 text-sm tracking-wider',
     className,
   )}
   {...rest}
 >
-  <a class="w-12 transition-all" href="/">
-    <Image
-      class="border-2 bg-primary border-primary/30 rounded-lg"
-      src={Logo}
-      alt="Logo"
-      draggable="false"
-    />
-  </a>
-  <aside class="flex flex-col gap-4 ml-1">
-    {
-      Object.entries(navigation).map(([title, route]) => {
-        const isProd = import.meta.env.PROD
-        const isActive = (isProd ? `${route}/` : route) === Astro.url.pathname
-        const isContact = Object.values(contacts ?? {}).includes(route)
-        return (
-          <a
-            class={twMerge(
-              'opacity-50',
-              isActive && 'font-bold opacity-100',
-              !isActive && 'hover:font-bold hover:opacity-100',
-            )}
-            href={route}
-            target={isContact ? '_blank' : '_self'}
-          >
-            {title}
-            {isActive && <i>*</i>}
-          </a>
-        )
-      })
-    }
-  </aside>
+  <section class="flex flex-col gap-8">
+    <a class="w-12 transition-all" href="/">
+      <Image
+        class="border-2 bg-primary border-primary/30 rounded-lg"
+        src={Logo}
+        alt="Logo"
+        draggable="false"
+      />
+    </a>
+    <aside class="flex flex-col gap-4 ml-1">
+      {
+        Object.entries(navigation).map(([title, route]) => {
+          const isProd = import.meta.env.PROD
+          const isActive = (isProd ? `${route}/` : route) === Astro.url.pathname
+          const isContact = Object.values(contacts ?? {}).includes(route)
+          return (
+            <a
+              class={twMerge(
+                'opacity-50',
+                isActive && 'font-bold opacity-100',
+                !isActive && 'hover:font-bold hover:opacity-100',
+              )}
+              href={route}
+              target={isContact ? '_blank' : '_self'}
+            >
+              {title}
+              {isActive && <i>*</i>}
+            </a>
+          )
+        })
+      }
+    </aside>
+  </section>
+  <Graphics class="ml-auto sm:mt-auto sm:ml-0" />
 </div>
