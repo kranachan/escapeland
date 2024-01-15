@@ -17,7 +17,7 @@ const { class: className } = Astro.props
     graphics.map((graphic) => {
       const { image, credit, link } = graphic
       return (
-        <a href={link}>
+        <a href={link} target="_blank">
           <SanityPicture asset={image.asset} alt={credit} />
         </a>
       )
