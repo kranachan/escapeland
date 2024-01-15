@@ -25,7 +25,11 @@ const products = await runQuery(productsQuery)
                 </WithArticle>
               </a>
               {github && (
-                <a class="flex items-center gap-2 text-xs mt-4" href={github}>
+                <a
+                  class="flex items-center gap-2 text-xs mt-4"
+                  href={github}
+                  target="_blank"
+                >
                   <Icon name="code" /> VIEW ON GITHUB
                 </a>
               )}
