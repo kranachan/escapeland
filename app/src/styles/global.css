@@ -42,7 +42,7 @@ html.dark {
 }
 
 button,
-a {
+a[href] {
   @apply cursor-pointer transition-all;
 
   &:hover {
