@@ -6,26 +6,39 @@ import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
 import { fetchProfile } from '~/store/profile'
 import Graphics from './Graphics.astro'
+import Icon from '~/components/common/Icon.astro'
 
 const profile = await fetchProfile()
 
 const { contacts } = profile
 
-const navigation = {
-  BLOG: '/blog',
-  ARTWORKS: '/artworks',
-  ENGINEERING: '/engineering',
-  ...Object.entries(contacts ?? []).reduce(
-    (accumulator: { [key: string]: string }, [key, value]) => {
-      if (key === 'email') {
-        accumulator['E-MAIL'] = `mailto:${value}`
-      } else {
-        accumulator[key.toUpperCase()] = value
-      }
-      return accumulator
-    },
-    {},
-  ),
+type Link = { url: string; icon: string; isExternal?: boolean }
+
+const contact4Navigation: Record<string, Link> = Object.fromEntries(
+  Object.entries(contacts ?? []).map(([key, value]) => {
+    if (key === 'email') {
+      return [
+        'E-MAIL',
+        { url: `mailto:${value}`, icon: 'mail', isExternal: true },
+      ]
+    }
+
+    if (key === 'telegram') {
+      return [
+        [key.toUpperCase()],
+        { url: value, icon: 'message-circle', isExternal: true },
+      ]
+    }
+
+    return [[key.toUpperCase()], { url: value, icon: key, isExternal: true }]
+  }),
+)
+
+const navigation: Record<string, Link> = {
+  BLOG: { url: '/blog', icon: 'scroll-text' },
+  ARTWORKS: { url: '/artworks', icon: 'pencil-ruler' },
+  ENGINEERING: { url: '/engineering', icon: 'binary' },
+  ...contact4Navigation,
 }
 
 export interface Props extends HTMLAttributes<'div'> {}
@@ -51,25 +64,29 @@ const { class: className, ...rest } = Astro.props
     </a>
     <aside class="flex flex-col gap-4 ml-1">
       {
-        Object.entries(navigation).map(([title, route]) => {
-          const isProd = import.meta.env.PROD
-          const isActive = (isProd ? `${route}/` : route) === Astro.url.pathname
-          const isContact = Object.values(contacts ?? {}).includes(route)
-          return (
-            <a
-              class={twMerge(
-                'opacity-50',
-                isActive && 'font-bold opacity-100',
-                !isActive && 'hover:font-bold hover:opacity-100',
-              )}
-              href={route}
-              target={isContact ? '_blank' : '_self'}
-            >
-              {title}
-              {isActive && <i>*</i>}
-            </a>
-          )
-        })
+        Object.entries(navigation).map(
+          ([title, { url, icon, isExternal = false }]) => {
+            const isProd = import.meta.env.PROD
+            const isActive = (isProd ? `${url}/` : url) === Astro.url.pathname
+            const isContact = Object.values(contacts ?? {}).includes(url)
+            return (
+              <a
+                class={twMerge(
+                  'flex items-center gap-4 opacity-50',
+                  isActive && 'font-bold opacity-100',
+                  !isActive && 'hover:font-bold hover:opacity-100',
+                )}
+                href={url}
+                target={isContact ? '_blank' : '_self'}
+              >
+                {icon && <Icon name={icon} />}
+                {title}
+                {isExternal && <Icon name="arrow-up-right" size={12} />}
+                {isActive && <i>*</i>}
+              </a>
+            )
+          },
+        )
       }
     </aside>
   </section>

@@ -1,8 +1,13 @@
 ---
-import { Icon as IconInternal } from 'astro-icon'
-import type { HTMLAttributes } from 'astro/types'
+import { Icon as IconInternal } from 'astro-icon/components'
 
-interface Props extends HTMLAttributes<'svg'> {}
+interface Props {
+  name: string
+  size?: number
+  class?: string
+}
+
+const { name, size = 16, ...rest } = Astro.props
 ---
 
-<IconInternal pack="pixelarticons" size="16" {...Astro.props} />
+<IconInternal name={`lucide:${name}`} size={size} {...rest} />
