@@ -4,6 +4,7 @@ import sanity from '@sanity/astro'
 import vercel from '@astrojs/vercel/static'
 import sitemap from '@astrojs/sitemap'
 import robotsTxt from 'astro-robots-txt'
+import icon from 'astro-icon'
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +18,7 @@ export default defineConfig({
     },
   }),
   integrations: [
+    icon(),
     sitemap(),
     robotsTxt(),
     tailwind(),
