@@ -20,11 +20,11 @@ const contact: Record<string, string> = Object.fromEntries(
   }),
 )
 
-const navigation: Record<string, { url: string; icon?: string }> = {
-  HOME: { url: '/', icon: 'heart' },
-  BLOG: { url: '/blog', icon: 'notebook' },
-  ARTWORKS: { url: '/artworks', icon: 'checkerboard' },
-  PROJECTS: { url: '/engineering', icon: 'device' },
+const navigation: Record<string, { pathname: string; icon?: string }> = {
+  HOME: { pathname: '/', icon: 'heart' },
+  BLOG: { pathname: '/blog/', icon: 'notebook' },
+  ARTWORKS: { pathname: '/artworks/', icon: 'checkerboard' },
+  PROJECTS: { pathname: '/engineering/', icon: 'device' },
 }
 
 export interface Props extends HTMLAttributes<'div'> {}
@@ -47,9 +47,8 @@ const { class: className, ...rest } = Astro.props
 >
   <section class="flex sm:flex-col sm:gap-8 flex-1">
     {
-      Object.entries(navigation).map(([title, { url, icon }]) => {
-        const isProd = import.meta.env.PROD
-        const isActive = (isProd ? `${url}/` : url) === Astro.url.pathname
+      Object.entries(navigation).map(([title, { pathname, icon }]) => {
+        const isActive = Astro.url.pathname === pathname
 
         return (
           <a
@@ -58,7 +57,7 @@ const { class: className, ...rest } = Astro.props
               isActive && 'font-bold',
               !isActive && 'group hover:font-bold',
             )}
-            href={url}
+            href={pathname}
           >
             {icon && (
               <div
