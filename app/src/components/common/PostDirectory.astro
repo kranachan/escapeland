@@ -34,23 +34,3 @@ const { directory, class: className, ...rest } = Astro.props
     })
   }
 </div>
-
-<!-- <script>
-  import { $isMobileNavOpen } from '~/store'
-
-  class AstroDirectory extends HTMLElement {
-    constructor() {
-      super()
-      $isMobileNavOpen.subscribe((isOpen) => {
-        if (isOpen) {
-          this.style.display = 'flex'
-          this.style.flexDirection = 'column-reverse'
-        } else {
-          this.style.display = 'none'
-        }
-      })
-    }
-  }
-
-  customElements.define('astro-directory', AstroDirectory)
-</script> -->

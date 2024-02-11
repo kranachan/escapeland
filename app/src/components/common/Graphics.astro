@@ -12,12 +12,12 @@ interface Props {
 const { class: className } = Astro.props
 ---
 
-<section class={clsx('w-20 grid gap-2', className)}>
+<section class={clsx('flex items-center gap-2', className)}>
   {
     graphics.map((graphic) => {
       const { image, credit, link } = graphic
       return (
-        <a href={link} target="_blank">
+        <a class="w-20" href={link} target="_blank">
           <SanityPicture asset={image.asset} alt={credit} />
         </a>
       )

@@ -5,7 +5,7 @@
 html.light {
   --colors-primary: 227 217 232;
   --colors-background: 244 244 244;
-  --colors-container: 223 223 223;
+  --colors-container: 234 230 236;
   --colors-on-background: 18 13 14;
   --colors-on-container: 18 13 14;
 }
@@ -13,7 +13,7 @@ html.light {
 html.dark {
   --colors-primary: 133 96 122;
   --colors-background: 18 13 14;
-  --colors-container: 223 223 223;
+  --colors-container: 59 46 54;
   --colors-on-background: 255 255 255;
   --colors-on-container: 255 255 255;
 }
