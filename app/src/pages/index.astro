@@ -2,10 +2,11 @@
 import PageLayout from '~/layouts/PageLayout.astro'
 import '@fontsource/bungee-shade'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
-import { fetchProfile } from '~/store/profile'
 import Graphics from '~/components/common/Graphics.astro'
+import { runQuery } from '~/sanity/run-query'
+import { profileQuery } from '~/sanity/schemas/profile'
 
-const profile = await fetchProfile()
+const profile = await runQuery(profileQuery)
 const { body, name } = profile
 ---
 

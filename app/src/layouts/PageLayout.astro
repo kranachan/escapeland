@@ -5,11 +5,12 @@ import '~/styles/crt-effect.css'
 import '~/styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
 import '~/styles/mouse-follower.css'
-import { fetchProfile } from '~/store/profile'
 import { SEO } from 'astro-seo'
 import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
 import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
+import { runQuery } from '~/sanity/run-query'
+import { profileQuery } from '~/sanity/schemas/profile'
 
 interface Props {
   title?: string
@@ -32,7 +33,7 @@ const {
 
 const url = Astro.request.url
 
-const profile = await fetchProfile()
+const profile = await runQuery(profileQuery)
 const { name } = profile
 
 const titleSuffix = `${name}'s Escapeland`
