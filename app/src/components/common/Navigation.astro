@@ -2,43 +2,28 @@
 import clsx from 'clsx'
 import type { HTMLAttributes } from 'astro/types'
 import { twMerge } from 'tailwind-merge'
-import { Image } from 'astro:assets'
-import Logo from '~/../public/favicon.svg'
 import { fetchProfile } from '~/store/profile'
-import Graphics from './Graphics.astro'
 import Icon from '~/components/common/Icon.astro'
 
 const profile = await fetchProfile()
 
 const { contacts } = profile
 
-type Link = { url: string; icon: string; isExternal?: boolean }
-
-const contact4Navigation: Record<string, Link> = Object.fromEntries(
+const contact: Record<string, string> = Object.fromEntries(
   Object.entries(contacts ?? []).map(([key, value]) => {
     if (key === 'email') {
-      return [
-        'E-MAIL',
-        { url: `mailto:${value}`, icon: 'mail', isExternal: true },
-      ]
+      return ['E-MAIL', `mailto:${value}`]
     }
 
-    if (key === 'telegram') {
-      return [
-        [key.toUpperCase()],
-        { url: value, icon: 'message-circle', isExternal: true },
-      ]
-    }
-
-    return [[key.toUpperCase()], { url: value, icon: key, isExternal: true }]
+    return [[key.toUpperCase()], value]
   }),
 )
 
-const navigation: Record<string, Link> = {
-  BLOG: { url: '/blog', icon: 'scroll-text' },
-  ARTWORKS: { url: '/artworks', icon: 'pencil-ruler' },
-  ENGINEERING: { url: '/engineering', icon: 'binary' },
-  ...contact4Navigation,
+const navigation: Record<string, { url: string; icon?: string }> = {
+  HOME: { url: '/', icon: 'heart' },
+  BLOG: { url: '/blog', icon: 'notebook' },
+  ARTWORKS: { url: '/artworks', icon: 'checkerboard' },
+  PROJECTS: { url: '/engineering', icon: 'device' },
 }
 
 export interface Props extends HTMLAttributes<'div'> {}
@@ -46,49 +31,61 @@ export interface Props extends HTMLAttributes<'div'> {}
 const { class: className, ...rest } = Astro.props
 ---
 
+<style>
+  .nav-link-base {
+    @apply flex flex-col text-xs items-center gap-2 w-full;
+  }
+</style>
+
 <div
   class={clsx(
-    'w-[calc(100%_-_3rem)] sm:w-auto sm:h-[calc(100%_-_8rem)] flex sm:flex-col gap-8 fixed left-6 text-sm tracking-wider',
+    'w-full sm:w-auto h-fit sm:h-full z-10 sm:z-auto flex sm:flex-col gap-4 fixed left-0 bottom-0 sm:left-1 sm:top-0 text-sm tracking-wider bg-container px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
     className,
   )}
   {...rest}
 >
-  <section class="flex flex-col gap-8">
-    <a class="w-12 transition-all" href="/">
-      <Image
-        class="border-2 bg-primary border-primary/30 rounded-lg"
-        src={Logo}
-        alt="Logo"
-        draggable="false"
-      />
-    </a>
-    <aside class="flex flex-col gap-4 ml-1">
-      {
-        Object.entries(navigation).map(
-          ([title, { url, icon, isExternal = false }]) => {
-            const isProd = import.meta.env.PROD
-            const isActive = (isProd ? `${url}/` : url) === Astro.url.pathname
-            const isContact = Object.values(contacts ?? {}).includes(url)
-            return (
-              <a
+  <section class="flex sm:flex-col sm:gap-8 flex-1">
+    {
+      Object.entries(navigation).map(([title, { url, icon }]) => {
+        const isProd = import.meta.env.PROD
+        const isActive = (isProd ? `${url}/` : url) === Astro.url.pathname
+
+        return (
+          <a
+            class={twMerge(
+              'nav-link-base',
+              isActive && 'font-bold',
+              !isActive && 'group hover:font-bold',
+            )}
+            href={url}
+          >
+            {icon && (
+              <div
                 class={twMerge(
-                  'flex items-center gap-4 opacity-50',
-                  isActive && 'font-bold opacity-100',
-                  !isActive && 'hover:font-bold hover:opacity-100',
+                  'p-2',
+                  isActive && 'bg-primary',
+                  !isActive && 'group-hover:bg-primary',
                 )}
-                href={url}
-                target={isContact ? '_blank' : '_self'}
               >
-                {icon && <Icon name={icon} />}
-                {title}
-                {isExternal && <Icon name="arrow-up-right" size={12} />}
-                {isActive && <i>*</i>}
-              </a>
-            )
-          },
+                <Icon name={icon} size={24} />
+              </div>
+            )}
+            {title}
+          </a>
         )
-      }
-    </aside>
+      })
+    }
   </section>
-  <Graphics class="ml-auto sm:mt-auto sm:ml-0" />
+  <section class="gap-2 sm:gap-8 mt-auto flex flex-col">
+    {
+      Object.entries(contact).map(([key, url]) => {
+        return (
+          <a class="nav-link-base" href={url} target="_blank">
+            {key}
+            <Icon name="arrow-up-right-box" size={12} />
+          </a>
+        )
+      })
+    }
+  </section>
 </div>

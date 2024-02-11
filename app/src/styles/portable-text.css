@@ -6,7 +6,7 @@
   }
 
   &:is(blockquote) {
-    @apply bg-container/10 px-4 py-2;
+    @apply bg-container/80 px-4 py-2;
     @apply border-x-4 border-primary;
   }
 

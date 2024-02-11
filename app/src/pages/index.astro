@@ -3,6 +3,7 @@ import PageLayout from '~/layouts/PageLayout.astro'
 import '@fontsource/bungee-shade'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
 import { fetchProfile } from '~/store/profile'
+import Graphics from '~/components/common/Graphics.astro'
 
 const profile = await fetchProfile()
 const { body, name } = profile
@@ -14,5 +15,6 @@ const { body, name } = profile
   </h1>
   <div class="max-w-[37.5rem]">
     <PortableText value={body} />
+    <Graphics class="mt-16" />
   </div>
 </PageLayout>
