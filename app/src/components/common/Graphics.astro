@@ -1,9 +1,10 @@
 ---
-import { fetchGraphics } from '~/store/graphics'
+import { runQuery } from '~/sanity/run-query'
 import SanityPicture from './SanityPicture.astro'
 import clsx from 'clsx'
+import { graphicsQuery } from '~/sanity/schemas/graphic'
 
-const graphics = await fetchGraphics()
+const graphics = await runQuery(graphicsQuery)
 
 interface Props {
   class?: string

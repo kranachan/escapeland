@@ -22,4 +22,3 @@ export const profileQuery = q('*')
       .optional(),
   })
   .slice(0)
-  .nullable()
