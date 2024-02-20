@@ -53,7 +53,7 @@ const { class: className, ...rest } = Astro.props
         const isActive = Astro.url.pathname === pathname
 
         return (
-          <a class="nav-link-base glitch" href={pathname}>
+          <a class="nav-link-base glitch group" href={pathname}>
             {icon && (
               <div
                 class={twMerge(
