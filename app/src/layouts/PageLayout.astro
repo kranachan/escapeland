@@ -6,11 +6,9 @@ import '~/styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
 import '~/styles/mouse-follower.css'
 import { SEO } from 'astro-seo'
-import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
-import { Image } from 'astro:assets'
-import Logo from '~/../public/favicon.svg'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
+import WindowStyledLayout from './WindowStyledLayout.astro'
 
 interface Props {
   title?: string
@@ -79,57 +77,16 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body
-    class="flex sm:justify-end px-8 pt-16 pb-32 sm:pb-16 sm:pl-28 font-dotgothic16 min-h-screen"
+    class="flex flex-col-reverse sm:flex-row gap-2 p-2 font-dotgothic16 min-h-screen fixed bottom-0 sm:static"
   >
-    <div class="app-window-layout">
-      <section class="app-window-title-bar">
-        <Image
-          src={Logo}
-          alt="Logo"
-          width={20}
-          class="mr-2 border border-on-background/10 rounded-md"
-        />
-        <span class="text-sm w-3/4 truncate">{fullTitle}</span>
-        <ColorSchemeToggle class="ml-auto pointer-events-auto" />
-      </section>
-    </div>
     <Navigation />
-    <main class="w-full">
-      <slot />
+    <main class="w-full bg-background rounded-xl">
+      <WindowStyledLayout headline={fullTitle}>
+        <slot />
+      </WindowStyledLayout>
     </main>
-    <style>
-      .app-window-layout {
-        @apply fixed top-0 left-0 z-20;
-        @apply w-full h-screen;
-        @apply pointer-events-none;
-
-        > .app-window-title-bar {
-          @apply flex items-center justify-center;
-          @apply w-full h-8 bg-primary px-1.5;
-        }
-
-        @media (pointer: fine) {
-          @apply border-[0.375rem] border-t-0 border-primary;
-
-          > .app-window-title-bar {
-            @apply px-0;
-          }
-        }
-      }
-    </style>
     <script>
-      import Lenis from '@studio-freight/lenis'
-
       document.addEventListener('astro:page-load', async () => {
-        const lenis = new Lenis()
-
-        const raf = (time: DOMHighResTimeStamp) => {
-          lenis.raf(time)
-          requestAnimationFrame(raf)
-        }
-
-        requestAnimationFrame(raf)
-
         if (window.matchMedia('(pointer: fine)').matches) {
           const { default: MouseFollower } = await import('mouse-follower')
           const { default: gsap } = await import('gsap')
