@@ -13,7 +13,7 @@ html.light {
 html.dark {
   --colors-primary: 133 96 122;
   --colors-background: 18 13 14;
-  --colors-container: 59 46 54;
+  --colors-container: 90 60 87;
   --colors-on-background: 255 255 255;
   --colors-on-container: 255 255 255;
 }
@@ -55,7 +55,7 @@ a[href] {
 }
 
 html {
-  @apply bg-background text-on-background;
+  @apply bg-primary text-on-background;
   @apply selection:bg-primary/50;
 
   -webkit-tap-highlight-color: transparent;

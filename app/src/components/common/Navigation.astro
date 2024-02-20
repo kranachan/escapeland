@@ -40,12 +40,14 @@ const { class: className, ...rest } = Astro.props
 
 <div
   class={clsx(
-    'w-full sm:w-auto h-fit sm:h-full z-10 sm:z-auto flex sm:flex-col gap-4 fixed left-0 bottom-0 sm:left-1 sm:top-0 text-sm tracking-wider bg-container px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
+    'w-full sm:w-auto h-fit sm:h-[calc(100vh_-_1rem)] flex sm:flex-col gap-4 sm:left-3 rounded-xl text-sm tracking-wider bg-background px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
     className,
   )}
   {...rest}
 >
-  <section class="flex sm:flex-col sm:gap-8 flex-1">
+  <section
+    class="flex sm:flex-col sm:gap-8 flex-1 justify-evenly sm:justify-normal"
+  >
     {
       Object.entries(navigation).map(([title, { pathname, icon }]) => {
         const isActive = Astro.url.pathname === pathname
@@ -53,7 +55,7 @@ const { class: className, ...rest } = Astro.props
         return (
           <a
             class={twMerge(
-              'nav-link-base',
+              'nav-link-base glitch',
               isActive && 'font-bold',
               !isActive && 'group hover:font-bold',
             )}
@@ -80,7 +82,7 @@ const { class: className, ...rest } = Astro.props
     {
       Object.entries(contact).map(([key, url]) => {
         return (
-          <a class="nav-link-base" href={url} target="_blank">
+          <a class="nav-link-base glitch" href={url} target="_blank">
             {key}
             <Icon name="arrow-up-right-box" size={12} />
           </a>
@@ -89,3 +91,11 @@ const { class: className, ...rest } = Astro.props
     }
   </section>
 </div>
+
+<script>
+  import { PowerGlitch } from 'powerglitch'
+
+  document.addEventListener('astro:page-load', async () => {
+    PowerGlitch.glitch('.glitch', { playMode: 'hover' })
+  })
+</script>
