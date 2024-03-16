@@ -77,10 +77,10 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body
-    class="flex flex-col-reverse sm:flex-row gap-2 p-2 font-dotgothic16 min-h-screen fixed bottom-0 sm:static"
+    class="flex flex-col-reverse sm:flex-row gap-2 p-2 font-dotgothic16 w-screen min-h-screen fixed bottom-0 sm:static"
   >
     <Navigation />
-    <main class="w-full bg-background rounded-xl">
+    <main class="max-w-full overflow-hidden bg-background rounded-xl">
       <WindowStyledLayout headline={fullTitle}>
         <slot />
       </WindowStyledLayout>
