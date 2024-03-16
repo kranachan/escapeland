@@ -40,7 +40,7 @@ const { class: className, ...rest } = Astro.props
 
 <div
   class={clsx(
-    'w-full sm:w-auto h-fit sm:h-[calc(100vh_-_1rem)] z-10 sm:z-auto flex sm:flex-col gap-4 sm:left-3 rounded-xl text-sm tracking-wider bg-background px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
+    'w-full sm:w-auto h-fit sm:h-full z-10 sm:z-auto flex sm:flex-col gap-4 sm:left-3 rounded-xl text-sm tracking-wider bg-background px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
     className,
   )}
   {...rest}
