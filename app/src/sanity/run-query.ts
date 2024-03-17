@@ -1,6 +1,6 @@
-import { useSanityClient } from '@sanity/astro'
+import { sanityClient } from 'sanity:client'
 import { makeSafeQueryRunner } from 'groqd'
 
 export const runQuery = makeSafeQueryRunner((query: string) =>
-  useSanityClient().fetch(query),
+  sanityClient.fetch(query),
 )
