@@ -77,8 +77,9 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body class="font-dotgothic16">
+    <!-- Todo: `dvh` fallback for older browsers -->
     <main
-      class="w-screen h-screen fixed bottom-0 sm:static flex flex-col-reverse sm:flex-row gap-2 p-2"
+      class="w-screen h-[100dvh] fixed bottom-0 sm:static flex flex-col-reverse sm:flex-row gap-2 p-2"
     >
       <Navigation />
       <div class="max-w-full overflow-hidden bg-background rounded-xl">
