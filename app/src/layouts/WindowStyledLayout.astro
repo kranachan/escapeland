@@ -67,7 +67,7 @@ const { headline, class: className, ...rest } = Astro.props
     @apply w-auto h-full rounded-xl flex flex-col;
 
     > .app-window-title-bar {
-      @apply flex items-center justify-center;
+      @apply flex flex-shrink-0 items-center justify-center;
       @apply w-full h-8 bg-container px-0;
     }
   }
