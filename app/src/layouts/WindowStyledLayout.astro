@@ -64,7 +64,7 @@ const { headline, class: className, ...rest } = Astro.props
 <style>
   .app-window-layout {
     @apply border-[0.375rem] border-t-0 border-container shadow-2xl;
-    @apply w-auto rounded-xl flex flex-col;
+    @apply w-auto h-full rounded-xl flex flex-col;
 
     > .app-window-title-bar {
       @apply flex items-center justify-center;
@@ -73,7 +73,7 @@ const { headline, class: className, ...rest } = Astro.props
   }
 
   .scroll-wrapper {
-    @apply h-[calc(100dvh_-_10rem)] sm:h-[calc(100vh_-_54px)] overflow-auto;
+    @apply overflow-auto;
 
     @media (pointer: fine) {
       &::-webkit-scrollbar {
