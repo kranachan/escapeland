@@ -8,8 +8,8 @@ export default defineConfig({
   name: 'default',
   title: 'Escapeland',
 
-  projectId: process.env.SECRET_PROJECT_ID ?? '',
-  dataset: process.env.SECRET_DATASET ?? '',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? '',
+  dataset: process.env.SANITY_STUDIO_DATASET ?? '',
 
   plugins: [deskTool(), visionTool(), codeInput()],
 
