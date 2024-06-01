@@ -11,6 +11,7 @@
     "prettier": "^3.0.0"
   },
   "scripts": {
+    "dev": "bun --filter '*' dev",
     "format": "bunx prettier --write ."
   }
 }
