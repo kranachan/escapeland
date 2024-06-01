@@ -3,11 +3,11 @@
   "private": true,
   "main": "package.json",
   "scripts": {
-    "dev": "sanity dev",
-    "start": "sanity start",
-    "build": "sanity build",
-    "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "dev": "dotenv -e ../.env sanity dev",
+    "start": "dotenv -e ../.env sanity start",
+    "build": "dotenv -e ../.env sanity build",
+    "deploy": "dotenv -e ../.env sanity deploy",
+    "deploy-graphql": "dotenv -e ../.env sanity graphql deploy"
   },
   "dependencies": {
     "@sanity/code-input": "^4.1.1",

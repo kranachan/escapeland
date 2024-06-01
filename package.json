@@ -13,7 +13,8 @@
     "turbo": "^1.13.3"
   },
   "scripts": {
-    "dev": "bun --filter '*' dev",
-    "format": "bunx prettier --write ."
+    "dev": "turbo --filter '*' dev",
+    "build": "turbo --filter '*' build",
+    "format": "prettier --write ."
   }
 }
