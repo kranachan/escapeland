@@ -9,6 +9,7 @@
     "@fontsource/dotgothic16": "^5.0.11",
     "@fontsource/libre-barcode-128-text": "^5.0.19",
     "@iconify-json/memory": "^1.1.9",
+    "@iconify/react": "^5.0.1",
     "@react-three/fiber": "^8.15.19",
     "@sanity/asset-utils": "^1.3.0",
     "@sanity/astro": "^3.0.0",
