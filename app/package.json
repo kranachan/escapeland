@@ -38,7 +38,7 @@
     "astro-robots-txt": "^1.0.0"
   },
   "scripts": {
-    "dev": "dotenv -e ../.env astro dev",
+    "dev": "dotenv -e ../.env astro dev -- --host",
     "build": "dotenv -e ../.env astro build",
     "preview": "dotenv -e ../.env astro preview"
   },
