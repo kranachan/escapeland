@@ -30,6 +30,7 @@
     "gsap": "^3.12.2",
     "medium-zoom": "^1.0.8",
     "mouse-follower": "^1.1.2",
+    "postprocessing": "^6.35.5",
     "powerglitch": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
