@@ -23,6 +23,7 @@
     "astro-portabletext": "^0.9.6",
     "astro-seo": "^0.8.3",
     "clsx": "^2.0.0",
+    "framer-motion": "^11.2.11",
     "groqd": "^0.15.9",
     "gsap": "^3.12.2",
     "medium-zoom": "^1.0.8",
