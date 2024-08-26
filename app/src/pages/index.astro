@@ -1,21 +1,80 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro'
-import '@fontsource/bungee-shade'
-import PortableText from '~/components/common/portable-text/PortableText.astro'
-import Graphics from '~/components/common/Graphics.astro'
+import '@fontsource/libre-barcode-128-text'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
+import { VelocityScroll } from '~/components/interactive/magicui/ScrollBasedVelocity'
+import { Image } from 'astro:assets'
+import Icon from '~/components/common/Icon.astro'
+import PortableText from '~/components/common/portable-text/PortableText.astro'
+import Graphics from '~/components/common/Graphics.astro'
 
 const profile = await runQuery(profileQuery)
-const { body, name } = profile
+const { name, body, contacts } = profile
+
+const contact: Record<string, string> = Object.fromEntries(
+  Object.entries(contacts ?? []).map(([key, value]) => {
+    if (key === 'email') {
+      return ['E-MAIL', `mailto:${value}`]
+    }
+
+    return [[key.toUpperCase()], value]
+  }),
+)
 ---
 
-<PageLayout>
-  <h1 class="mt-1 mb-9 font-bungee-shade text-3xl">
-    {name}'s Escapeland
-  </h1>
-  <div class="max-w-[37.5rem]">
-    <PortableText value={body} />
-    <Graphics class="mt-16" />
+<PageLayout
+  headerTitle={`v${__APP_VERSION__} ベータ システム言語 [ja-JP]`}
+  title={`${name.toLocaleUpperCase()}'s ESCAPELAND`}
+>
+  <Image
+    class=`absolute top-0 right-0 select-none
+      animate-pulse z-20 mix-blend-multiply
+      dark:mix-blend-screen brightness-90
+      dark:brightness-110`
+    src="/background.png"
+    alt="Background"
+    width={540}
+    height={270}
+    draggable="false"
+  />
+
+  <section class="select-none">
+    <h2 class="font-barcode128 text-3xl text-primary mt-2">
+      {name.toLocaleUpperCase()}'s <br /> ESCAPELAND
+    </h2>
+  </section>
+  <div class="flex items-center justify-center my-8 relative select-none">
+    <Image
+      class=`mix-blend-multiply
+        dark:mix-blend-normal dark:brightness-105
+        dark:shadow-2xl dark:shadow-primary`
+      src="/avatar.png"
+      alt="Avatar"
+      width={320}
+      height={520}
+      draggable="false"
+    />
   </div>
+  <VelocityScroll
+    text="SWEET DREAM"
+    className="text-primary text-2xl font-bold"
+    client:load
+  />
+
+  <div class="flex justify-center my-8 gap-8">
+    {
+      Object.entries(contact).map(([key, url]) => {
+        return (
+          <a class="flex items-center gap-2 text-xs" href={url} target="_blank">
+            {key}
+            <Icon name="arrow-up-right-box" size={12} />
+          </a>
+        )
+      })
+    }
+  </div>
+
+  <PortableText value={body} />
+  <Graphics class="mt-16" />
 </PageLayout>

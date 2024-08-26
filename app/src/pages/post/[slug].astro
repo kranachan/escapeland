@@ -34,6 +34,7 @@ const tags = categories?.map((category) => category.title)
     description: toPlainText(body),
     article: { tags, publishedTime: publishedAt.toDateString() },
   }}
+  withBackBtn
 >
   <Categories categories={categories} />
   <span class="text-sm">{publishedAt}</span>

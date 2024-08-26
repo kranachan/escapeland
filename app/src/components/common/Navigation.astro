@@ -1,10 +1,9 @@
 ---
-import clsx from 'clsx'
 import type { HTMLAttributes } from 'astro/types'
-import { twMerge } from 'tailwind-merge'
 import Icon from '~/components/common/Icon.astro'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
+import { cn } from '~/utils/style-related'
 
 const profile = await runQuery(profileQuery)
 
@@ -23,8 +22,8 @@ const contact: Record<string, string> = Object.fromEntries(
 const navigation: Record<string, { pathname: string; icon?: string }> = {
   HOME: { pathname: '/', icon: 'heart' },
   BLOG: { pathname: '/blog/', icon: 'notebook' },
-  ARTWORKS: { pathname: '/artworks/', icon: 'checkerboard' },
-  PROJECTS: { pathname: '/engineering/', icon: 'device' },
+  // ARTWORKS: { pathname: '/artworks/', icon: 'checkerboard' },
+  PROJECTS: { pathname: '/engineering/', icon: 'folder' },
 }
 
 export interface Props extends HTMLAttributes<'div'> {}
@@ -32,52 +31,32 @@ export interface Props extends HTMLAttributes<'div'> {}
 const { class: className, ...rest } = Astro.props
 ---
 
-<style>
-  .nav-link-base {
-    @apply flex flex-col text-xs items-center gap-2 w-full;
-  }
-</style>
-
 <div
-  class={clsx(
-    'w-full sm:w-auto h-auto z-10 sm:z-auto flex sm:flex-col gap-4 sm:left-3 rounded-xl text-sm tracking-wider bg-background px-2 sm:px-4 py-2 sm:py-16 items-center justify-center',
+  class={cn(
+    `w-full h-navigation flex gap-4 tracking-wider bg-container
+    text-sm text-on-container [text-shadow:none] px-2 py-2
+    items-center justify-center`,
     className,
   )}
   {...rest}
 >
-  <section
-    class="flex sm:flex-col sm:gap-8 flex-1 justify-evenly sm:justify-normal"
-  >
+  <section class="flex flex-1 justify-evenly">
     {
       Object.entries(navigation).map(([title, { pathname, icon }]) => {
         const isActive = Astro.url.pathname === pathname
 
         return (
-          <a class="nav-link-base glitch group" href={pathname}>
-            {icon && (
-              <div
-                class={twMerge(
-                  'p-2',
-                  isActive && 'bg-primary',
-                  !isActive && 'group-hover:bg-primary',
-                )}
-              >
-                <Icon name={icon} size={24} />
-              </div>
+          <a
+            class={cn(
+              `flex items-center gap-2
+              text-xs sm:text-sm w-full
+              glitch group opacity-50 select-none`,
+              isActive && 'opacity-100',
             )}
+            href={pathname}
+          >
+            {icon && <Icon name={icon} size={16} />}
             {title}
-          </a>
-        )
-      })
-    }
-  </section>
-  <section class="gap-2 sm:gap-8 mt-auto flex flex-col">
-    {
-      Object.entries(contact).map(([key, url]) => {
-        return (
-          <a class="nav-link-base glitch" href={url} target="_blank">
-            {key}
-            <Icon name="arrow-up-right-box" size={12} />
           </a>
         )
       })

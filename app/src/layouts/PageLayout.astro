@@ -1,6 +1,6 @@
 ---
-import Navigation from '~/components/common/Navigation.astro'
 import '@fontsource/dotgothic16'
+import Navigation from '~/components/common/Navigation.astro'
 import '~/styles/crt-effect.css'
 import '~/styles/global.css'
 import { ViewTransitions } from 'astro:transitions'
@@ -8,10 +8,12 @@ import '~/styles/mouse-follower.css'
 import { SEO } from 'astro-seo'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
-import WindowStyledLayout from './WindowStyledLayout.astro'
+import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
+import Icon from '~/components/common/Icon.astro'
 
 interface Props {
   title?: string
+  headerTitle?: string
   seo?: Partial<{
     image: string
     description: string
@@ -20,14 +22,11 @@ interface Props {
       tags: string[]
     }>
   }>
+  withBackBtn?: boolean
 }
-const { title, seo = {} } = Astro.props
+const { title, headerTitle, seo = {}, withBackBtn = false } = Astro.props
 
-const {
-  image = '/favicon.svg',
-  description = `Welcome to Escapeland, let's embark on an adventure now!`,
-  article,
-} = seo
+const { image = '/favicon.svg', description = `SWEET DREAM`, article } = seo
 
 const url = Astro.request.url
 
@@ -42,7 +41,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
   <head>
     <SEO
       charset="utf-8"
-      title={fullTitle}
+      title={title || fullTitle}
       description={description}
       twitter={{
         card: 'summary',
@@ -66,7 +65,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
         article: { authors: [name], ...article },
       }}
       extend={{
-        link: [{ rel: 'icon', href: '/favicon.svg' }],
+        link: [{ rel: 'icon', href: '/favicon.png' }],
         meta: [
           { name: 'viewport', content: 'width=device-width' },
           { name: 'generator', content: Astro.generator },
@@ -77,27 +76,67 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
     <ViewTransitions />
   </head>
   <body class="font-dotgothic16">
-    <!-- Todo: `dvh` fallback for older browsers -->
     <main
-      class="w-screen h-[100dvh] fixed bottom-0 sm:static flex flex-col-reverse sm:flex-row gap-2 p-2"
+      class=`w-full h-[100dvh] sm:w-[40rem] bg-background
+      sm:border-4 sm:border-on-background relative mx-auto my-0`
     >
-      <Navigation />
-      <div class="max-w-full overflow-hidden bg-background rounded-xl">
-        <WindowStyledLayout headline={fullTitle}>
-          <slot />
-        </WindowStyledLayout>
-      </div>
-    </main>
-    <script>
-      document.addEventListener('astro:page-load', async () => {
-        if (window.matchMedia('(pointer: fine)').matches) {
-          const { default: MouseFollower } = await import('mouse-follower')
-          const { default: gsap } = await import('gsap')
-
-          MouseFollower.registerGSAP(gsap)
-          new MouseFollower()
+      <div
+        class="flex justify-between h-title-bar items-center border-b-4 border-on-background"
+      >
+        {
+          withBackBtn && (
+            <button class="w-10 h-full flex justify-center items-center border-r-4 border-on-background">
+              <Icon name="arrow-left" />
+            </button>
+          )
         }
-      })
+        <span class="font-bold truncate ml-4">{headerTitle || title}</span>
+        <ColorSchemeToggle
+          class="w-10 h-full flex justify-center items-center border-l-4 border-on-background"
+        />
+      </div>
+      <Navigation class="absolute bottom-0" />
+      <page-layout class="flex flex-col">
+        <div class="scroll-wrapper h-main-view overflow-y-auto thin-scrollbar">
+          <div class="scroll-content p-main-view box-border relative">
+            <slot />
+          </div>
+        </div>
+      </page-layout>
+    </main>
+
+    <script>
+      class PageLayout extends HTMLElement {
+        constructor() {
+          super()
+          this.onPageLoad()
+        }
+        onPageLoad = () => {
+          document.addEventListener('astro:page-load', async () => {
+            if (window.matchMedia('(pointer: fine)').matches) {
+              const { default: MouseFollower } = await import('mouse-follower')
+              const { default: Lenis } = await import('@studio-freight/lenis')
+              const { default: gsap } = await import('gsap')
+
+              const lenis = new Lenis({
+                wrapper: this.querySelector('.scroll-wrapper') as HTMLElement,
+                content: this.querySelector('.scroll-content') as HTMLElement,
+              })
+
+              const raf = (time: DOMHighResTimeStamp) => {
+                lenis.raf(time)
+                requestAnimationFrame(raf)
+              }
+
+              requestAnimationFrame(raf)
+              MouseFollower.registerGSAP(gsap)
+              new MouseFollower()
+            }
+          })
+        }
+      }
+
+      customElements.define('page-layout', PageLayout)
     </script>
   </body>
 </html>

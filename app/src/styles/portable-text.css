@@ -6,8 +6,7 @@
   }
 
   &:is(blockquote) {
-    @apply bg-container/80 px-4 py-2;
-    @apply border-x-4 border-primary;
+    @apply bg-container text-on-container px-4 py-2 dark:[text-shadow:none];
   }
 
   &:is(li) {
@@ -15,7 +14,7 @@
   }
 
   &:is(a) {
-    @apply bg-primary px-1;
+    @apply bg-primary text-on-container px-1 dark:[text-shadow:none];
   }
 
   &:is(picture) {

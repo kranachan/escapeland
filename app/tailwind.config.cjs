@@ -4,9 +4,17 @@ module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      height: {
+        'title-bar': 'var(--title-bar-height)',
+        'navigation': 'var(--navigation-height)',
+        'main-view': 'var(--main-view-height)',
+      },
+      padding: {
+        'main-view': 'var(--main-view-padding)',
+      },
       fontFamily: {
         'dotgothic16': ['DotGothic16'],
-        'bungee-shade': ['Bungee Shade'],
+        'barcode128': ['"Libre Barcode 128 Text"'],
       },
       colors: {
         primary: 'rgb(var(--colors-primary))',
