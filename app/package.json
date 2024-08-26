@@ -10,6 +10,7 @@
     "@fontsource/libre-barcode-128-text": "^5.0.19",
     "@iconify-json/memory": "^1.1.9",
     "@iconify/react": "^5.0.1",
+    "@motionone/utils": "^10.18.0",
     "@react-three/drei": "^9.107.0",
     "@react-three/fiber": "^8.15.19",
     "@react-three/postprocessing": "^2.16.2",
