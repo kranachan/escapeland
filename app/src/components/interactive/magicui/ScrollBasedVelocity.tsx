@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '~/utils/style-related'
 import { wrap } from '@motionone/utils'
 import {
