@@ -85,7 +85,10 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
       >
         {
           withBackBtn && (
-            <button class="w-10 h-full flex justify-center items-center border-r-4 border-on-background">
+            <button
+              id="back-btn"
+              class="w-10 h-full flex justify-center items-center border-r-4 border-on-background"
+            >
               <Icon name="arrow-left" />
             </button>
           )
@@ -109,30 +112,56 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
       class PageLayout extends HTMLElement {
         constructor() {
           super()
-          this.onPageLoad()
+          this.init()
         }
-        onPageLoad = () => {
-          document.addEventListener('astro:page-load', async () => {
-            if (window.matchMedia('(pointer: fine)').matches) {
-              const { default: MouseFollower } = await import('mouse-follower')
-              const { default: Lenis } = await import('@studio-freight/lenis')
-              const { default: gsap } = await import('gsap')
 
-              const lenis = new Lenis({
-                wrapper: this.querySelector('.scroll-wrapper') as HTMLElement,
-                content: this.querySelector('.scroll-content') as HTMLElement,
-              })
+        async init() {
+          document.addEventListener('astro:page-load', this.handlePageLoad)
+        }
 
-              const raf = (time: DOMHighResTimeStamp) => {
-                lenis.raf(time)
-                requestAnimationFrame(raf)
-              }
+        handlePageLoad = async () => {
+          if (window.matchMedia('(pointer: fine)').matches) {
+            await this.setupSmoothScrollAndMouseFollower()
+          }
+          this.setupBackButton()
+        }
 
-              requestAnimationFrame(raf)
-              MouseFollower.registerGSAP(gsap)
-              new MouseFollower()
-            }
+        async setupSmoothScrollAndMouseFollower() {
+          const { default: MouseFollower } = await import('mouse-follower')
+          const { default: Lenis } = await import('@studio-freight/lenis')
+          const { default: gsap } = await import('gsap')
+
+          const lenis = new Lenis({
+            wrapper: this.querySelector('.scroll-wrapper') as HTMLElement,
+            content: this.querySelector('.scroll-content') as HTMLElement,
           })
+
+          const raf = (time: DOMHighResTimeStamp) => {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+          }
+
+          requestAnimationFrame(raf)
+          MouseFollower.registerGSAP(gsap)
+          new MouseFollower()
+        }
+
+        setupBackButton() {
+          const backBtnEl = document.getElementById('back-btn')
+          if (backBtnEl) {
+            this.debounce(backBtnEl, 300, () => history.back())
+          }
+        }
+
+        debounce(element: HTMLElement, delay: number, callback: () => void) {
+          let isDebouncing = false
+          element.onclick = () => {
+            if (!isDebouncing) {
+              isDebouncing = true
+              callback()
+              setTimeout(() => (isDebouncing = false), delay)
+            }
+          }
         }
       }
 
