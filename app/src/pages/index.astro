@@ -4,7 +4,8 @@ import '@fontsource/libre-barcode-128-text'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
 import { VelocityScroll } from '~/components/interactive/magicui/ScrollBasedVelocity'
-import { Image } from 'astro:assets'
+import { Image, Picture } from 'astro:assets'
+import AvatarWebp from '~/../public/avatar.webp'
 import Icon from '~/components/common/Icon.astro'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
 import Graphics from '~/components/common/Graphics.astro'
@@ -45,11 +46,11 @@ const contact: Record<string, string> = Object.fromEntries(
     </h2>
   </section>
   <div class="flex items-center justify-center my-8 relative select-none">
-    <Image
-      class=`mix-blend-multiply
-        dark:mix-blend-normal dark:brightness-105
-        dark:shadow-2xl dark:shadow-primary`
-      src="/avatar.png"
+    <Picture
+      class=`mix-blend-multiply dark:mix-blend-normal dark:brightness-105
+        dark:[filter:drop-shadow(0_0_2rem_rgb(var(--colors-primary)))]`
+      src={AvatarWebp}
+      formats={['avif', 'webp', 'png']}
       alt="Avatar"
       width={320}
       height={520}
