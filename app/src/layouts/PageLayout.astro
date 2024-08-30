@@ -33,7 +33,7 @@ const url = Astro.request.url
 const profile = await runQuery(profileQuery)
 const { name } = profile
 
-const titleSuffix = `${name}'s Escapeland`
+const titleSuffix = `${name.toLocaleUpperCase()}'s ESCAPELAND`
 const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
 ---
 
