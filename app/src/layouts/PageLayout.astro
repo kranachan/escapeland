@@ -10,6 +10,7 @@ import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
 import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
 import Icon from '~/components/common/Icon.astro'
+import AvatarWebp from '~/../public/avatar.webp'
 
 interface Props {
   title?: string
@@ -26,7 +27,11 @@ interface Props {
 }
 const { title, headerTitle, seo = {}, withBackBtn = false } = Astro.props
 
-const { image = '/favicon.svg', description = `SWEET DREAM`, article } = seo
+const {
+  image = new URL(AvatarWebp.src, Astro.url).toString(),
+  description = `SWEET DREAM`,
+  article,
+} = seo
 
 const url = Astro.request.url
 
