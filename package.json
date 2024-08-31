@@ -10,11 +10,12 @@
     "bun-types": "latest",
     "dotenv-cli": "^7.4.2",
     "prettier": "^3.0.0",
-    "turbo": "^1.13.3"
+    "turbo": "^2.1.1"
   },
   "scripts": {
     "dev": "turbo --filter '*' dev",
     "build": "turbo --filter '*' build",
     "format": "prettier --write ."
-  }
+  },
+  "packageManager": "bun@1.10.0"
 }
