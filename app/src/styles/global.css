@@ -5,10 +5,11 @@
 html {
   --navigation-height: 2rem;
   --title-bar-height: 2.5rem;
-  --main-view-padding: 1rem;
   --main-view-height: calc(
-    100dvh - var(--navigation-height) - var(--title-bar-height) -
-      (var(--main-view-padding) / 2)
+    100dvh - var(--navigation-height) - var(--title-bar-height)
+  );
+  --main-view-height-minus-layout-border: calc(
+    100dvh - var(--navigation-height) - var(--title-bar-height) - 0.5rem
   );
 }
 

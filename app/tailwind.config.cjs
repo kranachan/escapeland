@@ -8,9 +8,8 @@ module.exports = {
         'title-bar': 'var(--title-bar-height)',
         'navigation': 'var(--navigation-height)',
         'main-view': 'var(--main-view-height)',
-      },
-      padding: {
-        'main-view': 'var(--main-view-padding)',
+        'main-view-height-minus-layout-border':
+          'var(--main-view-height-minus-layout-border)',
       },
       fontFamily: {
         'dotgothic16': ['DotGothic16'],

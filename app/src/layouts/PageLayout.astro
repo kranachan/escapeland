@@ -105,8 +105,10 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
       </div>
       <Navigation class="absolute bottom-0" />
       <page-layout class="flex flex-col">
-        <div class="scroll-wrapper h-main-view overflow-y-auto thin-scrollbar">
-          <div class="scroll-content p-main-view box-border relative">
+        <div
+          class="scroll-wrapper h-main-view sm:h-main-view-height-minus-layout-border overflow-y-auto thin-scrollbar"
+        >
+          <div class="scroll-content p-4 box-border relative">
             <slot />
           </div>
         </div>
@@ -131,7 +133,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
           this.setupBackButton()
         }
 
-        async setupSmoothScrollAndMouseFollower() {
+        setupSmoothScrollAndMouseFollower = async () => {
           const { default: MouseFollower } = await import('mouse-follower')
           const { default: Lenis } = await import('@studio-freight/lenis')
           const { default: gsap } = await import('gsap')
@@ -151,14 +153,18 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
           new MouseFollower()
         }
 
-        setupBackButton() {
+        setupBackButton = () => {
           const backBtnEl = document.getElementById('back-btn')
           if (backBtnEl) {
             this.debounce(backBtnEl, 300, () => history.back())
           }
         }
 
-        debounce(element: HTMLElement, delay: number, callback: () => void) {
+        debounce = (
+          element: HTMLElement,
+          delay: number,
+          callback: () => void,
+        ) => {
           let isDebouncing = false
           element.onclick = () => {
             if (!isDebouncing) {
