@@ -11,7 +11,7 @@ export const postsQuery = q('*')
     slug: q.slug('slug'),
     title: q.string(),
     publishedAt: q.date(),
-    mainImage: sanityImage('mainImage'),
+    // mainImage: sanityImage('mainImage'),
     isPostListVisible: q.boolean(),
     categories: q('categories')
       .filter()

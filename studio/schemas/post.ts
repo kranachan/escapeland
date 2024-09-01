@@ -19,14 +19,14 @@ export default defineType({
         maxLength: 96,
       },
     }),
-    defineField({
-      name: 'mainImage',
-      title: 'Main image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
+    // defineField({
+    //   name: 'mainImage',
+    //   title: 'Main image',
+    //   type: 'image',
+    //   options: {
+    //     hotspot: true,
+    //   },
+    // }),
     defineField({
       name: 'categories',
       title: 'Categories',
@@ -52,12 +52,5 @@ export default defineType({
 
   initialValue: {
     isPostListVisible: true,
-  },
-
-  preview: {
-    select: {
-      title: 'title',
-      media: 'mainImage',
-    },
   },
 })

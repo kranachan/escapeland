@@ -2,33 +2,31 @@
 import PageLayout from '~/layouts/PageLayout.astro'
 import { postsQuery } from '~/sanity/schemas/post'
 import { runQuery } from '~/sanity/run-query'
-import WithArticle from '~/components/common/WithArticle.astro'
-import Categories from '~/components/common/Categories.astro'
 import { sortDescendingByDate } from '~/utils/sort'
-import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
-import SanityPicture from '~/components/common/SanityPicture.astro'
 
-const posts = (await runQuery(postsQuery)).filter(
-  (post) => post.isPostListVisible,
-)
+const posts = (await runQuery(postsQuery))
+  .filter((post) => post.isPostListVisible)
+  .sort(sortDescendingByDate('publishedAt'))
 ---
 
 <PageLayout title={'BLOG'}>
   {
     posts && (
-      <ResponsiveListLayout>
-        {posts.sort(sortDescendingByDate('publishedAt')).map((post) => {
-          const { slug, categories, mainImage, ...article } = post
+      <section class="flex flex-col gap-4">
+        {posts.map((post) => {
           return (
-            <a href={`/post/${slug}`}>
-              <WithArticle article={article}>
-                <SanityPicture class="mb-2" asset={mainImage.asset} />
-                <Categories categories={categories} />
-              </WithArticle>
-            </a>
+            <div class="flex flex-col gap-2">
+              <span class="text-xs">{post.publishedAt.toDateString()}</span>
+              <a
+                class="bg-container text-on-container px-2 py-2 sm:py-0 border-b border-background text-left w-full [text-shadow:none]"
+                href={`/post/${post.slug}`}
+              >
+                {post.title}
+              </a>
+            </div>
           )
         })}
-      </ResponsiveListLayout>
+      </section>
     )
   }
 </PageLayout>
