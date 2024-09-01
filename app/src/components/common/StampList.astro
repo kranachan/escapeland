@@ -1,5 +1,5 @@
 ---
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import StampItem from './StampItem.astro'
 import type { HTMLAttributes } from 'astro/types'
 
@@ -14,7 +14,7 @@ const { stamps, class: className, ...rest } = Astro.props
 ---
 
 <div
-  class={clsx(
+  class={cn(
     'flex gap-4 overflow-x-scroll hidden-scrollbar flex-nowrap',
     className,
   )}

@@ -5,7 +5,7 @@ import PortableTextLink from './PortableTextLink.astro'
 import CodeBlock from './CodeBlock.astro'
 import type { PortableTextProps } from 'astro-portabletext/types'
 import '~/styles/portable-text.css'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 
 interface Props extends PortableTextProps {
   class?: string
@@ -25,7 +25,7 @@ const { class: className, ...rest } = Astro.props
 ---
 
 <PortableTextInternal
-  class={clsx('portable-text', className)}
+  class={cn('portable-text', className)}
   components={components}
   {...rest}
 />

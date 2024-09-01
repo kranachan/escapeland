@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 
 interface Props extends HTMLAttributes<'button'> {
   stamp: {
@@ -13,7 +13,7 @@ const { stamp, class: className, ...rest } = Astro.props
 ---
 
 <button
-  class={clsx(
+  class={cn(
     'flex gap-8 w-24 h-24 relative items-end justify-center bg-[url(/../src/assets/sd-card.svg)] flex-shrink-0',
     className,
   )}

@@ -1,7 +1,7 @@
 ---
 import { runQuery } from '~/sanity/run-query'
 import SanityPicture from './SanityPicture.astro'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import { graphicsQuery } from '~/sanity/schemas/graphic'
 
 const graphics = await runQuery(graphicsQuery)
@@ -13,7 +13,7 @@ interface Props {
 const { class: className } = Astro.props
 ---
 
-<section class={clsx('flex items-center gap-2', className)}>
+<section class={cn('flex items-center gap-2', className)}>
   {
     graphics.map((graphic) => {
       const { image, credit, link } = graphic

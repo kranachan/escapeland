@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import { type PostDirectory } from '~/sanity/schemas/post'
 
 interface Props extends HTMLAttributes<'div'> {
@@ -11,7 +11,7 @@ const { directory, class: className, ...rest } = Astro.props
 ---
 
 <div
-  class={clsx(
+  class={cn(
     'flex flex-col justify-start items-end text-end h-full gap-4 overflow-y-auto thin-scrollbar',
     className,
   )}
@@ -22,7 +22,7 @@ const { directory, class: className, ...rest } = Astro.props
       const isCurrentSlug = Astro.params.slug === directory.slug
       return (
         <a
-          class={clsx('text-xs', !isCurrentSlug && 'opacity-50')}
+          class={cn('text-xs', !isCurrentSlug && 'opacity-50')}
           href={directory.slug}
         >
           <p>{directory.publishedAt.toDateString()}</p>

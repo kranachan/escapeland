@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import type { Article } from '~/@types/article'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 
 interface Props extends HTMLAttributes<'div'> {
   article: Article
@@ -18,7 +18,7 @@ const isWithPublishedDate = 'publishedAt' in article
 ---
 
 <div
-  class={clsx(
+  class={cn(
     'flex flex-col gap-1 cursor-pointer hover:brightness-75 transition-all',
     className,
   )}

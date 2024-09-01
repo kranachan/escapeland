@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import Category from './Category.astro'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import type { Category as ICategory } from '~/sanity/schemas/category'
 
 interface Props extends HTMLAttributes<'aside'> {
@@ -13,7 +13,7 @@ const { class: className, categories, ...rest } = Astro.props
 
 {
   categories && (
-    <aside class={clsx('flex gap-2', className)} {...rest}>
+    <aside class={cn('flex gap-2', className)} {...rest}>
       {categories.map((category) => {
         return <Category category={category} />
       })}

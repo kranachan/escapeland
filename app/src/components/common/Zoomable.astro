@@ -1,13 +1,13 @@
 ---
 import '~/styles/medium-zoom.css'
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 
 interface Props extends HTMLAttributes<'div'> {}
 const { class: className } = Astro.props
 ---
 
-<astro-zoomable class={clsx('h-fit', className)} {...Astro.props}>
+<astro-zoomable class={cn('h-fit', className)} {...Astro.props}>
   <slot />
 </astro-zoomable>
 

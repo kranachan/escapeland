@@ -1,13 +1,13 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 
 interface Props extends HTMLAttributes<'button'> {}
 const { class: className, ...rest } = Astro.props
 ---
 
 <astro-color-scheme-toggle
-  class={clsx(
+  class={cn(
     'color-scheme-toggle text-on-background/30 cursor-pointer',
     className,
   )}

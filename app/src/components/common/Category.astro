@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import type { Category as ICategory } from '~/sanity/schemas/category'
 
 interface Props extends HTMLAttributes<'button'> {
@@ -11,7 +11,7 @@ const { class: className, category, ...rest } = Astro.props
 ---
 
 <button
-  class={clsx(
+  class={cn(
     'block w-max text-xs px-2 py-0.5 bg-container cursor-pointer outline outline-1 outline-primary dark:outline-none',
     className,
   )}

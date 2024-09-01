@@ -2,7 +2,7 @@
 import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
 import { Image } from 'astro:assets'
 import Logo from '~/../public/favicon.svg'
-import clsx from 'clsx'
+import { cn } from '~/utils/style-related'
 import type { HTMLAttributes } from 'astro/types'
 
 interface Props extends HTMLAttributes<'div'> {
@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<'div'> {
 const { headline, class: className, ...rest } = Astro.props
 ---
 
-<window-styled-layout class={clsx('app-window-layout', className)} {...rest}>
+<window-styled-layout class={cn('app-window-layout', className)} {...rest}>
   <section class="app-window-title-bar">
     <Image
       src={Logo}
