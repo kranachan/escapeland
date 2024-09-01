@@ -125,12 +125,6 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
         async init() {
           if (window.matchMedia('(pointer: fine)').matches) {
             await this.setupMouseFollower()
-          }
-          document.addEventListener('astro:page-load', this.handlePageLoad)
-        }
-
-        handlePageLoad = async () => {
-          if (window.matchMedia('(pointer: fine)').matches) {
             await this.setupSmoothScroll()
           }
           this.setupBackButton()
