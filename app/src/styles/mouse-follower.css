@@ -14,7 +14,7 @@
 }
 
 .mf-cursor::before {
-  @apply bg-primary dark:bg-primary dark:border-on-background/80 dark:border;
+  @apply bg-primary dark:border-on-background/80 dark:border;
   @apply w-48 h-48 -top-24 -left-24;
   @apply transition-all duration-300;
 
