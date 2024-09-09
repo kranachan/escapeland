@@ -1,8 +1,8 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'product',
-  title: 'Product',
+  name: 'project',
+  title: 'Project',
   type: 'document',
   fields: [
     defineField({
@@ -26,22 +26,41 @@ export default defineType({
     defineField({
       name: 'startedAt',
       title: 'Started At',
-      type: 'datetime',
+      type: 'date',
+      options: {
+        dateFormat: 'MMM-YYYY',
+      },
     }),
     defineField({
       name: 'completedAt',
       title: 'Completed At',
-      type: 'datetime',
+      type: 'date',
+      options: {
+        dateFormat: 'MMM-YYYY',
+      },
     }),
     defineField({
-      name: 'website',
-      title: 'Website',
+      name: 'status',
+      title: 'Status',
       type: 'string',
+      options: {
+        list: [
+          { title: 'Draft', value: 'draft' },
+          { title: 'WIP', value: 'wip' },
+          { title: 'Done', value: 'done' },
+        ],
+        layout: 'radio',
+      },
     }),
     defineField({
-      name: 'github',
-      title: 'Github',
-      type: 'string',
+      name: 'resources',
+      title: 'Resources',
+      type: 'object',
+      fields: [
+        { name: 'website', title: 'Website', type: 'string' },
+        { name: 'design', title: 'Design', type: 'string' },
+        { name: 'sourceCode', title: 'Source Code', type: 'string' },
+      ],
     }),
   ],
 

@@ -1,42 +1,80 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro'
 import { runQuery } from '~/sanity/run-query'
-import { productsQuery } from '~/sanity/schemas/product'
-import WithArticle from '~/components/common/WithArticle.astro'
-import Icon from '~/components/common/Icon.astro'
+import { projectsQuery } from '~/sanity/schemas/project'
 import { sortDescendingByDate } from '~/utils/sort'
-import ResponsiveListLayout from '~/layouts/ResponsiveListLayout.astro'
 import SanityPicture from '~/components/common/SanityPicture.astro'
+import { Image } from 'astro:assets'
+import { formatDateToMonthYearString, camelToSentenceCase } from '~/utils'
 
-const products = await runQuery(productsQuery)
+const projects = (await runQuery(projectsQuery)).sort(
+  sortDescendingByDate('startedAt'),
+)
 ---
 
 <PageLayout title={'PROJECTS'}>
   {
-    products && (
-      <ResponsiveListLayout>
-        {products.sort(sortDescendingByDate('startedAt')).map((product) => {
-          const { mainImage, website, github, ...article } = product
+    projects && (
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {projects.map((project) => {
+          const {
+            mainImage,
+            resources,
+            title,
+            startedAt,
+            completedAt,
+            description,
+            status,
+          } = project
+
           return (
-            <article>
-              <a href={website} target="_blank">
-                <WithArticle article={article}>
-                  <SanityPicture class="mb-2" asset={mainImage.asset} />
-                </WithArticle>
-              </a>
-              {github && (
-                <a
-                  class="flex items-center gap-2 text-xs mt-4"
-                  href={github}
-                  target="_blank"
-                >
-                  <Icon name="application-code" /> VIEW ON GITHUB
-                </a>
-              )}
-            </article>
+            <div class="flex flex-col p-2 bg-container text-on-container [text-shadow:none]">
+              <div class="relative">
+                <SanityPicture asset={mainImage.asset} />
+                <Image
+                  class="absolute -bottom-4 right-0 opacity-75 [filter:drop-shadow(0_0_0.125rem_rgb(var(--colors-primary)))] select-none"
+                  width={80}
+                  height={64}
+                  src={`/${status}.png`}
+                  draggable="false"
+                  alt="Status"
+                />
+              </div>
+
+              <div class="flex flex-col mt-2 gap-2 h-full justify-between">
+                <section>
+                  <div class="flex justify-between items-end border-b border-on-container">
+                    <h2 class="text-lg font-bold">{title}</h2>
+                    <span class="text-xs text-right">
+                      {`${formatDateToMonthYearString(startedAt)} - ${completedAt ? formatDateToMonthYearString(completedAt) : 'Present'}`}
+                    </span>
+                  </div>
+
+                  <p class="text-sm">{description}</p>
+                </section>
+
+                <section>
+                  <h3>Resources</h3>
+                  <div class="flex flex-col">
+                    {Object.entries(resources).map(
+                      ([keyName, link]) =>
+                        link && (
+                          <a
+                            class="py-2 sm:py-0 text-xs bg-primary border border-on-container"
+                            href={link}
+                            target="_blank"
+                          >
+                            {`>${camelToSentenceCase(keyName).toLocaleUpperCase()}`}
+                          </a>
+                        ),
+                    )}
+                  </div>
+                </section>
+              </div>
+            </div>
           )
         })}
-      </ResponsiveListLayout>
+      </div>
     )
-  }
-</PageLayout>
+  }</PageLayout
+>
