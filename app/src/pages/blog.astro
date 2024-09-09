@@ -3,6 +3,7 @@ import PageLayout from '~/layouts/PageLayout.astro'
 import { postsQuery } from '~/sanity/schemas/post'
 import { runQuery } from '~/sanity/run-query'
 import { sortDescendingByDate } from '~/utils/sort'
+import { formatDate } from '~/utils'
 
 const posts = (await runQuery(postsQuery))
   .filter((post) => post.isPostListVisible)
@@ -16,7 +17,7 @@ const posts = (await runQuery(postsQuery))
         {posts.map((post) => {
           return (
             <div class="flex flex-col gap-2">
-              <span class="text-xs">{post.publishedAt.toDateString()}</span>
+              <span class="text-xs">{formatDate(post.publishedAt)}</span>
               <a
                 class="bg-container text-on-container px-2 py-2 sm:py-0 border-b border-background text-left w-full [text-shadow:none]"
                 href={`/post/${post.slug}`}

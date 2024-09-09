@@ -5,7 +5,7 @@ import { projectsQuery } from '~/sanity/schemas/project'
 import { sortDescendingByDate } from '~/utils/sort'
 import SanityPicture from '~/components/common/SanityPicture.astro'
 import { Image } from 'astro:assets'
-import { formatDateToMonthYearString, camelToSentenceCase } from '~/utils'
+import { formatDate, camelToSentenceCase } from '~/utils'
 
 const projects = (await runQuery(projectsQuery)).sort(
   sortDescendingByDate('startedAt'),
@@ -46,7 +46,7 @@ const projects = (await runQuery(projectsQuery)).sort(
                   <div class="flex justify-between items-end border-b border-on-container">
                     <h2 class="text-lg font-bold">{title}</h2>
                     <span class="text-xs text-right">
-                      {`${formatDateToMonthYearString(startedAt)} - ${completedAt ? formatDateToMonthYearString(completedAt) : 'Present'}`}
+                      {`${formatDate(startedAt, false)} - ${completedAt ? formatDate(completedAt, false) : 'Present'}`}
                     </span>
                   </div>
 
