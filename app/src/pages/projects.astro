@@ -6,6 +6,7 @@ import { sortDescendingByDate } from '~/utils/sort'
 import SanityPicture from '~/components/common/SanityPicture.astro'
 import { Image } from 'astro:assets'
 import { formatDate, camelToSentenceCase } from '~/utils'
+import Icon from '~/components/common/Icon.astro'
 
 const projects = (await runQuery(projectsQuery)).sort(
   sortDescendingByDate('startedAt'),
@@ -60,11 +61,12 @@ const projects = (await runQuery(projectsQuery)).sort(
                       ([keyName, link]) =>
                         link && (
                           <a
-                            class="py-2 sm:py-0 text-xs bg-primary border border-on-container"
+                            class="flex py-2 sm:py-0 pr-2 sm:pr-0 text-xs bg-primary border border-on-container"
                             href={link}
                             target="_blank"
                           >
                             {`>${camelToSentenceCase(keyName).toLocaleUpperCase()}`}
+                            <Icon class="ml-auto" name="arrow-top-right" />
                           </a>
                         ),
                     )}

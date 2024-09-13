@@ -3,6 +3,7 @@ import { runQuery } from '~/sanity/run-query'
 import SanityPicture from './SanityPicture.astro'
 import { cn } from '~/utils/style-related'
 import { graphicsQuery } from '~/sanity/schemas/graphic'
+import Icon from '~/components/common/Icon.astro'
 
 const graphics = await runQuery(graphicsQuery)
 
@@ -20,8 +21,13 @@ const { class: className } = Astro.props
       const pictureEl = <SanityPicture asset={image.asset} alt={credit} />
 
       return link ? (
-        <a class="w-20" href={link} target="_blank">
+        <a class="relative w-20" href={link} target="_blank">
           {pictureEl}
+          <Icon
+            class="absolute bg-background text-on-background left-0 bottom-0"
+            name="arrow-up-right-box"
+            size={12}
+          />
         </a>
       ) : (
         <div class="w-20">{pictureEl}</div>

@@ -1,6 +1,7 @@
 ---
 import type { Props as $, Mark } from 'astro-portabletext/types'
 import { cn } from '~/utils/style-related'
+import Icon from '~/components/common/Icon.astro'
 
 type Props = $<Mark<{ href: string }>>
 
@@ -14,4 +15,5 @@ const { node, class: className } = Astro.props
   rel="noreferrer"
 >
   <slot />
+  <Icon class="inline-block" size={12} name="arrow-up-right-box" />
 </a>
