@@ -16,6 +16,34 @@ export default defineType({
       type: 'blockContent',
     }),
     defineField({
+      name: 'media',
+      title: 'Media',
+      type: 'object',
+      fields: [
+        {
+          name: 'avatar',
+          title: 'Avatar Image',
+          description:
+            'Image ratio: 320px x 524px (or maintain this aspect ratio).',
+          type: 'image',
+        },
+        {
+          name: 'blogBanner',
+          title: 'Blog Banner Image',
+          description:
+            'Image ratio: 600px x 200px (or maintain this aspect ratio).',
+          type: 'image',
+        },
+        {
+          name: 'projectsBanner',
+          title: 'Projects Banner Image',
+          description:
+            'Image ratio: 600px x 200px (or maintain this aspect ratio).',
+          type: 'image',
+        },
+      ],
+    }),
+    defineField({
       name: 'contacts',
       title: 'Contacts',
       type: 'object',

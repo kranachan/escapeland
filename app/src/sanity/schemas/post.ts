@@ -1,4 +1,4 @@
-import { q, sanityImage, type InferType } from 'groqd'
+import { q, type InferType } from 'groqd'
 import { body } from './parts/body'
 
 export type Post = InferType<typeof postsQuery>[number]

@@ -6,11 +6,13 @@ import { getImageDimensions } from '@sanity/asset-utils'
 
 interface Props {
   asset: SanityAsset
+  width?: number
+  height?: number
   alt?: string | null
   class?: string | undefined | null
 }
 
-const { asset, alt, class: className, ...rest } = Astro.props
+const { asset, width, height, alt, class: className, ...rest } = Astro.props
 const webpUrl = urlForImage(asset).auto('format').url()
 const dimensions = getImageDimensions(webpUrl)
 ---
@@ -18,9 +20,9 @@ const dimensions = getImageDimensions(webpUrl)
 <Picture
   data-cursor="-media"
   src={webpUrl}
-  width={dimensions.width}
-  height={dimensions.height}
-  formats={['webp', 'avif', 'png', 'jpeg', 'jpg', 'svg']}
+  width={width ?? dimensions.width}
+  height={height ?? dimensions.height}
+  formats={['webp', 'avif', 'png', 'jpeg', 'svg']}
   draggable={false}
   alt={alt ?? '[picture]'}
   pictureAttributes={{ class: className }}

@@ -9,9 +9,10 @@ import AvatarWebp from '~/../public/avatar.webp'
 import Icon from '~/components/common/Icon.astro'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
 import Graphics from '~/components/common/Graphics.astro'
+import SanityPicture from '~/components/common/SanityPicture.astro'
 
 const profile = await runQuery(profileQuery)
-const { name, body, contacts } = profile
+const { name, body, media, contacts } = profile
 
 const contact: Record<string, string> = Object.fromEntries(
   Object.entries(contacts ?? []).map(([key, value]) => {
@@ -22,9 +23,17 @@ const contact: Record<string, string> = Object.fromEntries(
     return [[key.toUpperCase()], value]
   }),
 )
+
+const avatarProps = {
+  class: `mix-blend-multiply dark:mix-blend-normal dark:brightness-105
+          dark:[filter:drop-shadow(0_0_1rem_rgb(var(--colors-primary)))]`,
+  width: 320,
+  height: 524,
+  alt: 'Avatar Image',
+}
 ---
 
-<PageLayout headerTitle={`ベータ システム言語 [ja-JP]`}>
+<PageLayout headerTitle={`☆☆☆ [Beta]`}>
   <Image
     class=`absolute top-0 right-0 select-none
       animate-pulse z-20 mix-blend-multiply
@@ -42,19 +51,23 @@ const contact: Record<string, string> = Object.fromEntries(
       {name.toLocaleUpperCase()}'s <br /> ESCAPELAND
     </h2>
   </section>
+
   <div class="flex items-center justify-center my-8 relative select-none">
     <Graphics class="flex-col absolute left-0 bottom-8 z-20" />
-    <Picture
-      class=`mix-blend-multiply dark:mix-blend-normal dark:brightness-105
-        dark:[filter:drop-shadow(0_0_1rem_rgb(var(--colors-primary)))]`
-      src={AvatarWebp}
-      formats={['avif', 'webp', 'png']}
-      alt="Avatar"
-      width={320}
-      height={524}
-      draggable="false"
-    />
+    {
+      media?.avatar?.asset ? (
+        <SanityPicture asset={media.avatar.asset} {...avatarProps} />
+      ) : (
+        <Picture
+          src={AvatarWebp}
+          formats={['avif', 'webp', 'png']}
+          draggable={false}
+          {...avatarProps}
+        />
+      )
+    }
   </div>
+
   <VelocityScroll
     text="SWEET DREAM"
     className="text-primary text-2xl font-bold"

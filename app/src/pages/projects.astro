@@ -7,6 +7,9 @@ import SanityPicture from '~/components/common/SanityPicture.astro'
 import { Image } from 'astro:assets'
 import { formatDate, camelToSentenceCase } from '~/utils'
 import Icon from '~/components/common/Icon.astro'
+import { profileQuery } from '~/sanity/schemas/profile'
+
+const { media } = await runQuery(profileQuery)
 
 const projects = (await runQuery(projectsQuery)).sort(
   sortDescendingByDate('startedAt'),
@@ -14,6 +17,11 @@ const projects = (await runQuery(projectsQuery)).sort(
 ---
 
 <PageLayout title={'PROJECTS'}>
+  {
+    media?.projectsBanner && (
+      <SanityPicture class="block mb-5" asset={media.projectsBanner} />
+    )
+  }
   {
     projects && (
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
