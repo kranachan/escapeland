@@ -38,7 +38,7 @@ const avatarProps = {
     class=`absolute top-0 right-0 select-none
       animate-pulse z-20 mix-blend-multiply
       dark:mix-blend-screen brightness-90
-      dark:brightness-110`
+      dark:brightness-110 pointer-events-none`
     src="/background.png"
     alt="Background"
     width={540}
@@ -54,18 +54,20 @@ const avatarProps = {
 
   <div class="flex items-center justify-center my-8 relative select-none">
     <Graphics class="flex-col absolute left-0 bottom-8 z-20" />
-    {
-      media?.avatar?.asset ? (
-        <SanityPicture asset={media.avatar.asset} {...avatarProps} />
-      ) : (
-        <Picture
-          src={AvatarWebp}
-          formats={['avif', 'webp', 'png']}
-          draggable={false}
-          {...avatarProps}
-        />
-      )
-    }
+    <div class="scanlines glitch-avatar cursor-help">
+      {
+        media?.avatar?.asset ? (
+          <SanityPicture asset={media.avatar.asset} {...avatarProps} />
+        ) : (
+          <Picture
+            src={AvatarWebp}
+            formats={['avif', 'webp', 'png']}
+            draggable={false}
+            {...avatarProps}
+          />
+        )
+      }
+    </div>
   </div>
 
   <VelocityScroll
@@ -90,3 +92,22 @@ const avatarProps = {
   <PortableText value={body} />
   <Graphics class="mt-16" />
 </PageLayout>
+
+<script>
+  import { PowerGlitch } from 'powerglitch'
+
+  document.addEventListener('astro:page-load', async () => {
+    PowerGlitch.glitch('.glitch-avatar', {
+      playMode: 'click',
+      timing: { easing: 'ease-in-out', duration: 1000 },
+      slice: {
+        count: 4,
+        velocity: 8,
+        minHeight: 0.2,
+        maxHeight: 0.4,
+        hueRotate: false,
+      },
+      shake: false,
+    })
+  })
+</script>
