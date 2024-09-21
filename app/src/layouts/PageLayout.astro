@@ -11,6 +11,7 @@ import { profileQuery } from '~/sanity/schemas/profile'
 import ColorSchemeToggle from '~/components/common/ColorSchemeToggle.astro'
 import Icon from '~/components/common/Icon.astro'
 import AvatarWebp from '~/../public/avatar.webp'
+import { cn } from '~/utils'
 
 interface Props {
   title?: string
@@ -98,7 +99,9 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
             </button>
           )
         }
-        <span class="font-bold truncate ml-4">{headerTitle || title}</span>
+        <span class={cn('font-bold truncate', !withBackBtn && 'ml-4')}>
+          {headerTitle || title}
+        </span>
         <ColorSchemeToggle
           class="w-10 h-full flex justify-center items-center border-l-4 border-on-background"
         />
