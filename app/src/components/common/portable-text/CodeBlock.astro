@@ -1,13 +1,14 @@
 ---
 import '~/styles/prism-theme.css'
 import { Prism } from '@astrojs/prism'
+import type { Props as $, TypedObject } from 'astro-portabletext/types'
 
-interface Props {
-  node: {
+type Props = $<
+  TypedObject & {
     language: string
     code: string
   }
-}
+>
 
 const { node } = Astro.props
 ---

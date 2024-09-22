@@ -3,7 +3,10 @@ import { PortableText as PortableTextInternal } from 'astro-portabletext'
 import PortableTextImage from './PortableTextImage.astro'
 import PortableTextLink from './PortableTextLink.astro'
 import CodeBlock from './CodeBlock.astro'
-import type { PortableTextProps } from 'astro-portabletext/types'
+import type {
+  PortableTextProps,
+  PortableTextComponents,
+} from 'astro-portabletext/types'
 import '~/styles/portable-text.css'
 import { cn } from '~/utils/style-related'
 
@@ -11,7 +14,7 @@ interface Props extends PortableTextProps {
   class?: string
 }
 
-const components = {
+const components: Partial<PortableTextComponents> = {
   type: {
     image: PortableTextImage,
     codeBlock: CodeBlock,

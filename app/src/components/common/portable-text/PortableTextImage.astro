@@ -1,15 +1,15 @@
 ---
+import type { Props as $, TypedObject } from 'astro-portabletext/types'
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 import Zoomable from '../Zoomable.astro'
 import SanityPicture from '../SanityPicture.astro'
 
-interface Props {
-  node: {
+type Props = $<
+  TypedObject & {
     asset: SanityAsset
     alt?: string | null
   }
-  class?: string | undefined | null
-}
+>
 
 const { node, class: className } = Astro.props
 ---
