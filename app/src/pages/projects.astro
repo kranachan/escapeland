@@ -46,7 +46,7 @@ const projects = (await runQuery(projectsQuery)).sort(
                   height={64}
                   src={`/${status}.png`}
                   draggable="false"
-                  alt="Status"
+                  alt={`Project Status: ${status}`}
                 />
               </div>
 

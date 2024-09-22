@@ -24,7 +24,7 @@ const dimensions = getImageDimensions(webpUrl)
   height={height ?? dimensions.height}
   formats={['webp', 'avif', 'png', 'jpeg', 'svg']}
   draggable={false}
-  alt={alt ?? '[picture]'}
+  alt={alt ?? ''}
   pictureAttributes={{ class: className }}
   {...rest}
 />
