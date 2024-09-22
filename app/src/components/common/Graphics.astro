@@ -4,17 +4,18 @@ import SanityPicture from './SanityPicture.astro'
 import { cn } from '~/utils/style-related'
 import { graphicsQuery } from '~/sanity/schemas/graphic'
 import Icon from '~/components/common/Icon.astro'
+import type { HTMLAttributes } from 'astro/types'
 
 const graphics = await runQuery(graphicsQuery)
 
-interface Props {
+interface Props extends HTMLAttributes<'section'> {
   class?: string
 }
 
-const { class: className } = Astro.props
+const { class: className, ...rest } = Astro.props
 ---
 
-<section class={cn('flex items-center gap-2', className)}>
+<section class={cn('flex items-center gap-2', className)} {...rest}>
   {
     graphics.map((graphic) => {
       const { image, credit, link } = graphic

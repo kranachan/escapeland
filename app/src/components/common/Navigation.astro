@@ -31,7 +31,7 @@ export interface Props extends HTMLAttributes<'div'> {}
 const { class: className, ...rest } = Astro.props
 ---
 
-<div
+<nav
   class={cn(
     `w-full h-navigation flex gap-4 tracking-wider bg-container
     text-sm text-on-container [text-shadow:none] px-2 py-2
@@ -62,7 +62,7 @@ const { class: className, ...rest } = Astro.props
       })
     }
   </section>
-</div>
+</nav>
 
 <script>
   import { PowerGlitch } from 'powerglitch'
