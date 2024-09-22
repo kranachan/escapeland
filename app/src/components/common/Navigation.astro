@@ -1,23 +1,8 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import Icon from '~/components/common/Icon.astro'
-import { runQuery } from '~/sanity/run-query'
-import { profileQuery } from '~/sanity/schemas/profile'
 import { cn } from '~/utils/style-related'
-
-const profile = await runQuery(profileQuery)
-
-const { contacts } = profile
-
-const contact: Record<string, string> = Object.fromEntries(
-  Object.entries(contacts ?? []).map(([key, value]) => {
-    if (key === 'email') {
-      return ['E-MAIL', `mailto:${value}`]
-    }
-
-    return [[key.toUpperCase()], value]
-  }),
-)
+import { HotKeyHint } from '~/components/interactive/HotKeyHint'
 
 const navigation: Record<string, { pathname: string; icon?: string }> = {
   HOME: { pathname: '/', icon: 'heart' },
@@ -44,19 +29,23 @@ const { class: className, ...rest } = Astro.props
     {
       Object.entries(navigation).map(([title, { pathname, icon }]) => {
         const isActive = Astro.url.pathname === pathname
+        const shortcut = title.charAt(0)
 
         return (
           <a
             class={cn(
-              `flex items-center gap-2
-              text-xs sm:text-sm glitch
-              group opacity-50 select-none`,
+              `glitch flex items-center gap-2
+               text-xs sm:text-sm group
+               opacity-50 select-none`,
               isActive && 'opacity-100',
             )}
             href={pathname}
+            aria-keyshortcuts={shortcut}
+            tabindex={-1}
           >
             {icon && <Icon name={icon} size={16} />}
             {title}
+            {<HotKeyHint hotkey={shortcut} client:only="react" />}
           </a>
         )
       })

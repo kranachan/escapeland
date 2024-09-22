@@ -56,6 +56,10 @@ button,
 a[href] {
   @apply cursor-pointer transition-all;
 
+  &:focus {
+    @apply outline-2 outline-black dark:outline-blue-600;
+  }
+
   &:hover {
     @apply brightness-75;
   }

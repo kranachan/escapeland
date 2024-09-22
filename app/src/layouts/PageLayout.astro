@@ -86,7 +86,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
       class=`w-full h-[100dvh] sm:w-[40rem] bg-background
       sm:border-4 sm:border-on-background relative mx-auto my-0`
     >
-      <div
+      <header
         class="flex justify-between h-title-bar items-center border-b-4 border-on-background"
       >
         {
@@ -104,8 +104,9 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
         </span>
         <ColorSchemeToggle
           class="w-10 h-full flex justify-center items-center border-l-4 border-on-background"
+          tabindex={0}
         />
-      </div>
+      </header>
       <Navigation class="absolute bottom-0" />
       <page-layout class="flex flex-col">
         <div
@@ -131,6 +132,7 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
             await this.setupSmoothScroll()
           }
           this.setupBackButton()
+          this.setupHotKeys()
         }
 
         setupMouseFollower = async () => {
@@ -155,6 +157,23 @@ const fullTitle = title ? `${title} - ${titleSuffix}` : titleSuffix
           }
 
           requestAnimationFrame(raf)
+        }
+
+        setupHotKeys = async () => {
+          const {
+            hotkeyKeyUX,
+            pressKeyUX,
+            startKeyUX,
+            focusGroupKeyUX,
+            jumpKeyUX,
+          } = await import('keyux')
+
+          startKeyUX(window, [
+            hotkeyKeyUX(),
+            pressKeyUX('is-pressed'),
+            focusGroupKeyUX(),
+            jumpKeyUX(),
+          ])
         }
 
         setupBackButton = () => {

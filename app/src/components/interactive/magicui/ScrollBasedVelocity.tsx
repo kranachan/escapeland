@@ -99,7 +99,7 @@ export const VelocityScroll: FC<VelocityScrollProps> = ({
   }
 
   return (
-    <section className="relative w-full">
+    <section aria-hidden={true} className="relative w-full">
       <ParallaxText baseVelocity={default_velocity} className={className}>
         {text}
       </ParallaxText>
