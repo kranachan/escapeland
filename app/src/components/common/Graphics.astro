@@ -5,14 +5,17 @@ import { cn } from '~/utils/style-related'
 import { graphicsQuery } from '~/sanity/schemas/graphic'
 import Icon from '~/components/common/Icon.astro'
 import type { HTMLAttributes } from 'astro/types'
+import type { ImgAttributes } from 'astro:assets'
+import type { SanityImageSize } from '@sanity/asset-utils'
 
 const graphics = await runQuery(graphicsQuery)
 
 interface Props extends HTMLAttributes<'section'> {
   class?: string
+  pictureAttributes?: Partial<ImgAttributes & SanityImageSize>
 }
 
-const { class: className, ...rest } = Astro.props
+const { class: className, pictureAttributes, ...rest } = Astro.props
 ---
 
 <section class={cn('flex items-center gap-2', className)} {...rest}>
@@ -23,6 +26,7 @@ const { class: className, ...rest } = Astro.props
         <SanityPicture
           asset={image.asset}
           alt={credit && `Graphic by ${credit}`}
+          {...pictureAttributes}
         />
       )
 

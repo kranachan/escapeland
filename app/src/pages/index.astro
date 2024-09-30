@@ -4,12 +4,13 @@ import '@fontsource/libre-barcode-128-text'
 import { runQuery } from '~/sanity/run-query'
 import { profileQuery } from '~/sanity/schemas/profile'
 import { VelocityScroll } from '~/components/interactive/magicui/ScrollBasedVelocity'
-import { Image, Picture } from 'astro:assets'
+import { Image, Picture, type ImgAttributes } from 'astro:assets'
 import AvatarWebp from '~/../public/avatar.webp'
 import Icon from '~/components/common/Icon.astro'
 import PortableText from '~/components/common/portable-text/PortableText.astro'
 import Graphics from '~/components/common/Graphics.astro'
 import SanityPicture from '~/components/common/SanityPicture.astro'
+import type { SanityImageSize } from '@sanity/asset-utils'
 
 const profile = await runQuery(profileQuery)
 const { name, body, media, contacts } = profile
@@ -24,12 +25,13 @@ const contact: Record<string, string> = Object.fromEntries(
   }),
 )
 
-const avatarProps = {
+const avatarProps: ImgAttributes & SanityImageSize = {
   class: `mix-blend-multiply dark:mix-blend-normal dark:brightness-105
           dark:[filter:drop-shadow(0_0_1rem_rgb(var(--colors-primary)))]`,
   width: 320,
   height: 524,
   alt: `${name}'s Avatar`,
+  fetchpriority: 'high',
 }
 ---
 
@@ -97,7 +99,11 @@ const avatarProps = {
   </div>
 
   <PortableText value={body} />
-  <Graphics role="contentinfo" class="mt-16" />
+  <Graphics
+    role="contentinfo"
+    class="mt-16"
+    pictureAttributes={{ fetchpriority: 'low' }}
+  />
 </PageLayout>
 
 <script>

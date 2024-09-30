@@ -39,5 +39,9 @@ const tags = categories?.map((category) => category.title)
   <span class="text-sm">{formatDate(publishedAt)}</span>
   <h1 class="text-2xl font-bold mb-4">{title}</h1>
   <PortableText value={body} />
-  <Graphics role="contentinfo" class="mt-16" />
+  <Graphics
+    role="contentinfo"
+    class="mt-16"
+    pictureAttributes={{ fetchpriority: 'low' }}
+  />
 </PageLayout>

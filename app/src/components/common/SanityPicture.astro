@@ -1,18 +1,15 @@
 ---
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 import { urlForImage } from '~/sanity/image-builder'
-import { Picture } from 'astro:assets'
-import { getImageDimensions } from '@sanity/asset-utils'
+import { Picture, type ImgAttributes } from 'astro:assets'
+import { getImageDimensions, type SanityImageSize } from '@sanity/asset-utils'
 
-interface Props {
+type Props = {
   asset: SanityAsset
-  width?: number
-  height?: number
   alt?: string | null
-  class?: string | undefined | null
-}
+} & Partial<Omit<ImgAttributes, 'alt'> & SanityImageSize>
 
-const { asset, width, height, alt, class: className, ...rest } = Astro.props
+const { asset, width, height, class: className, alt, ...rest } = Astro.props
 const webpUrl = urlForImage(asset).auto('format').url()
 const dimensions = getImageDimensions(webpUrl)
 ---
@@ -23,8 +20,8 @@ const dimensions = getImageDimensions(webpUrl)
   width={width ?? dimensions.width}
   height={height ?? dimensions.height}
   formats={['webp', 'avif', 'png', 'jpeg', 'svg']}
-  draggable={false}
   alt={alt ?? ''}
+  draggable={false}
   pictureAttributes={{ class: className }}
   {...rest}
 />
