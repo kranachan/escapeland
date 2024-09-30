@@ -5,6 +5,7 @@ import project from './project'
 import post from './post'
 import profile from './profile'
 import graphic from './graphic'
+import codeBlock from './code-block'
 
 export const schemaTypes = [
   profile,
@@ -13,5 +14,6 @@ export const schemaTypes = [
   project,
   category,
   blockContent,
+  codeBlock,
   graphic,
 ]

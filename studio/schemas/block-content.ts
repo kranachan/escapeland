@@ -1,4 +1,5 @@
 import { defineType, defineArrayMember } from 'sanity'
+import { ImageIcon } from '@sanity/icons'
 
 /**
  * This is the schema definition for the rich text fields used for
@@ -63,12 +64,13 @@ export default defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      icon: ImageIcon,
       options: { hotspot: true },
     },
     {
       name: 'codeBlock',
       title: 'Code Block',
-      type: 'code',
+      type: 'codeBlock',
     },
   ],
 })

@@ -2,15 +2,32 @@
 import '~/styles/prism-theme.css'
 import { Prism } from '@astrojs/prism'
 import type { Props as $, TypedObject } from 'astro-portabletext/types'
+import Icon from '../Icon.astro'
 
 type Props = $<
   TypedObject & {
-    language: string
-    code: string
+    filePath: string
+    codeObject: {
+      language: string
+      code: string
+    }
   }
 >
 
 const { node } = Astro.props
+const { filePath, codeObject } = node
+const { language, code } = codeObject
 ---
 
-<Prism lang={node.language} code={node.code} />
+<section class="relative my-2 border border-on-background">
+  <div class="flex items-center px-4 bg-container text-on-container">
+    <span class="font-bold [text-shadow:none]">{filePath}</span>
+    <div class="flex ml-auto opacity-50">
+      <Icon name="alpha-c-fill" />
+      <Icon name="alpha-o" />
+      <Icon name="alpha-d-fill" />
+      <Icon name="alpha-e" />
+    </div>
+  </div>
+  <Prism lang={language} code={code} />
+</section>

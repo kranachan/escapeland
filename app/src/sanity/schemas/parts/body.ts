@@ -1,4 +1,4 @@
-import { q, sanityImage } from 'groqd'
+import { q } from 'groqd'
 
 export const body = q('body')
   .filter()
@@ -10,8 +10,11 @@ export const body = q('body')
     },
     '_type == "codeBlock"': {
       _type: q.literal('codeBlock'),
-      code: q.string(),
-      language: q.string(),
+      filePath: q.string().optional(),
+      codeObject: q.object({
+        code: q.string(),
+        language: q.string(),
+      }),
     },
     default: {
       _key: q.string(),
