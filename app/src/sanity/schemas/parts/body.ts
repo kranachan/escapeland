@@ -10,7 +10,7 @@ export const body = q('body')
     },
     '_type == "codeBlock"': {
       _type: q.literal('codeBlock'),
-      filePath: q.string().optional(),
+      filePath: q.string().nullable(),
       codeObject: q.object({
         code: q.string(),
         language: q.string(),

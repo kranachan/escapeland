@@ -6,7 +6,7 @@ import Icon from '../Icon.astro'
 
 type Props = $<
   TypedObject & {
-    filePath: string
+    filePath: string | null
     codeObject: {
       language: string
       code: string
@@ -20,8 +20,8 @@ const { language, code } = codeObject
 ---
 
 <section class="relative my-2 border border-on-background">
-  <div class="flex items-center px-4 bg-container text-on-container">
-    <span class="font-bold [text-shadow:none]">{filePath}</span>
+  <div class="flex items-center h-6 px-4 bg-container text-on-container">
+    {filePath && <span class="font-bold [text-shadow:none]">{filePath}</span>}
     <div class="flex ml-auto opacity-50">
       <Icon name="alpha-c-fill" />
       <Icon name="alpha-o" />
