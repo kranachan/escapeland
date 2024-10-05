@@ -25,7 +25,7 @@ const { class: className, ...rest } = Astro.props
   )}
   {...rest}
 >
-  <section class="flex flex-1 justify-evenly">
+  <section class="flex flex-1 justify-evenly items-center h-full">
     {
       Object.entries(navigation).map(([title, { pathname, icon }]) => {
         const isActive = Astro.url.pathname === pathname
@@ -35,8 +35,7 @@ const { class: className, ...rest } = Astro.props
           <a
             class={cn(
               `glitch flex items-center gap-2
-               text-xs sm:text-sm group
-               opacity-50 select-none`,
+               text-sm group opacity-50 select-none`,
               isActive && 'opacity-100',
             )}
             href={pathname}

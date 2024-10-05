@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  --navigation-height: 2rem;
+:root {
+  --navigation-height: 2.5rem;
   --title-bar-height: 2.5rem;
   --main-view-height: calc(
     100dvh - var(--navigation-height) - var(--title-bar-height)
@@ -11,9 +11,13 @@ html {
   --main-view-height-minus-layout-border: calc(
     100dvh - var(--navigation-height) - var(--title-bar-height) - 0.5rem
   );
+
+  @media (pointer: fine) {
+    --navigation-height: 2rem;
+  }
 }
 
-html.light {
+:root.light {
   --colors-primary: 38 162 255;
   --colors-background: 244 244 244;
   --colors-container: 201 231 249;
@@ -21,7 +25,7 @@ html.light {
   --colors-on-container: 18 13 14;
 }
 
-html.dark {
+:root.dark {
   --colors-primary: 201 231 249;
   --colors-background: 18 13 14;
   --colors-container: 255 255 255;
@@ -53,7 +57,8 @@ html.dark {
 }
 
 button,
-a[href] {
+a[href],
+*[role='button'] {
   @apply cursor-pointer transition-all;
 
   &:focus {
