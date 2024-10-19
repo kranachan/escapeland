@@ -17,5 +17,5 @@
     "build": "turbo --filter '*' build",
     "format": "prettier --write ."
   },
-  "packageManager": "bun@1.10.0"
+  "packageManager": "bun@1.1.31"
 }
