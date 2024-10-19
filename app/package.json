@@ -47,6 +47,7 @@
   "scripts": {
     "dev": "dotenv -e ../.env astro dev -- --host",
     "build": "dotenv -e ../.env astro build",
+    "serverless-build": "astro build",
     "preview": "dotenv -e ../.env astro preview"
   },
   "type": "module"
