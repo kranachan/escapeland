@@ -62,7 +62,8 @@ a[href],
   @apply cursor-pointer transition-all;
 
   &:focus {
-    @apply outline-2 outline-black dark:outline-blue-600;
+    @apply outline-2 outline-black dark:outline-pink-400;
+    @apply brightness-90 dark:brightness-110 shadow-primary shadow-lg;
   }
 
   &:hover {

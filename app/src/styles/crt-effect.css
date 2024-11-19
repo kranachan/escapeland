@@ -6,7 +6,7 @@
 
   &::before,
   &::after {
-    @apply content-[''] block fixed z-10;
+    @apply content-[''] block fixed z-20;
     @apply top-0 left-0 right-0 bottom-0;
     @apply pointer-events-none;
   }
