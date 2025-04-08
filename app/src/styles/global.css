@@ -42,18 +42,6 @@
       @apply hidden;
     }
   }
-
-  .thin-scrollbar {
-    &::-webkit-scrollbar {
-      @apply w-2 h-1;
-
-      background-color: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      @apply bg-container;
-    }
-  }
 }
 
 button,
